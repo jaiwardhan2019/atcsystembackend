@@ -1,5 +1,6 @@
-package com.atcportal.main.models;
+package com.atcportal.main.repository;
 
+import com.atcportal.main.models.Booking;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Transactional;
 
