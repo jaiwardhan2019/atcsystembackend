@@ -1,20 +1,20 @@
 /**
  * 
  */
-package com.dineshonjava.sdjpa.controller;
+package com.atcportal.main.controller;
 
 import java.util.Date;
 
+import com.atcportal.main.models.Booking;
+import com.atcportal.main.models.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.dineshonjava.sdjpa.models.Booking;
-import com.dineshonjava.sdjpa.models.BookingRepository;
-
 /**
- * @author Dinesh.Rajput
+ * @author Jai.Wardhan
+ *   https://www.javainuse.com/spring/boot-jwt-mysql
  *
  */
 @RestController
@@ -22,7 +22,7 @@ import com.dineshonjava.sdjpa.models.BookingRepository;
 public class BookingController {
 	
 	@Autowired
-	BookingRepository bookingRepository;
+    BookingRepository bookingRepository;
 	/**
 	 * GET /create  --> Create a new booking and save it in the database.
 	 */

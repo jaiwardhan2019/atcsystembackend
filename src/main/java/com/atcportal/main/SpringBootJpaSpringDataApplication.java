@@ -1,4 +1,4 @@
-package com.dineshonjava.sdjpa;
+package com.atcportal.main;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

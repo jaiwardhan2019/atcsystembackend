@@ -1,4 +1,4 @@
-package com.dineshonjava.sdjpa.models;
+package com.atcportal.main.models;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Transactional;

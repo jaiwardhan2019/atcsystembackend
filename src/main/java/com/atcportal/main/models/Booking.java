@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.dineshonjava.sdjpa.models;
+package com.atcportal.main.models;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -14,11 +14,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * @author Dinesh.Rajput
+ * @author Jai Wardhan
  *
  */
 @Entity
-@Table(name = "BOOKING")
+@Table(name = "booking")
 public class Booking implements Serializable{
 
 	/**

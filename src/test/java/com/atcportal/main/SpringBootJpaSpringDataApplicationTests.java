@@ -1,4 +1,4 @@
-package com.dineshonjava.sdjpa;
+package com.atcportal.main;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,6 +11,7 @@ public class SpringBootJpaSpringDataApplicationTests {
 
 	@Test
 	public void contextLoads() {
+		System.out.println(" Hi this is TEST Context Load please Ignore  ");
 	}
 
 }
