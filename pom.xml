@@ -9,7 +9,7 @@
 	<packaging>jar</packaging>
 
 	<name>SpringBootJPASpringData</name>
-	<description>SpringBootJPASpringData project for Spring Boot with Spring Data JPA implementation</description>
+	<description>Spring Boot JPA Backend Rest API Service for ATC System portal </description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>

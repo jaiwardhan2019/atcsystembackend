@@ -1,6 +1,7 @@
 package com.atcportal.main.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -14,8 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.security.authentication.AuthenticationManager;
 
 import com.atcportal.main.repository.UserDao;
-import com.atcportal.main.models.DAOUser;
-import com.atcportal.main.models.UserDTO;
+import com.atcportal.main.models.UserDetail;
 
 @Service
 public class JwtUserDetailsService implements UserDetailsService {
@@ -31,7 +31,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		DAOUser user = userDao.findByUsername(username);
+		UserDetail user = userDao.findByUsername(username);
 		if (user == null) {
 			throw new UsernameNotFoundException("User not found with username: " + username);
 		}
@@ -42,8 +42,8 @@ public class JwtUserDetailsService implements UserDetailsService {
 
 
 	//------ Save User And Encoded Password to the DataBase
-	public DAOUser save(UserDTO user) {
-		DAOUser newUser = new DAOUser();
+	public UserDetail save(UserDetail user) {
+		UserDetail newUser = new UserDetail();
 		newUser.setUsername(user.getUsername());
 		newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
 		return userDao.save(newUser);

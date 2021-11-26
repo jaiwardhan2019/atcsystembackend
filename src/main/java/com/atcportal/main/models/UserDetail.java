@@ -6,15 +6,18 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "user_master")
-public class DAOUser {
+public class UserDetail {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	@Column
 	private String username;
+
 	@Column
-	@JsonIgnore
+	private String usercode;
+
+	@Column
 	private String password;
 
 	public String getUsername() {
@@ -24,6 +27,10 @@ public class DAOUser {
 	public void setUsername(String username) {
 		this.username = username;
 	}
+
+	public String getUsercode() { return usercode; 	}
+
+	public void setUsercode(String usercode) { 	this.usercode = usercode; }
 
 	public String getPassword() {
 		return password;
