@@ -16,9 +16,6 @@ public interface UserDao extends CrudRepository<UserDetail, Integer> {
 	
 	UserDetail findByUsername(String loginid);
 
-	@Query("select p from Person p where p.identifier = :identifier")
-	UserDetail findAllActiveUsersProfile(String loginid);
-
 /*
 	@Query(value = "SELECT * FROM USERS u WHERE u.status = 1",nativeQuery = true)
 	Collection<UserProfile> findAllActiveUsersNative();
@@ -26,5 +23,7 @@ public interface UserDao extends CrudRepository<UserDetail, Integer> {
 
 	@Query("select p from Person p where p.identifier = :identifier")
 	Person findAllActiveUsersProfile(@Param("usedcode") String usedcode);*/
+
+
 
 }
