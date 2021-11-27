@@ -58,7 +58,7 @@ public class JwtAuthenticationController {
 		userProfileList.add(new UserProfile(1,"ADMIN"));
 		userProfileList.add(new UserProfile(1,"PARTS"));
 		userProfileList.add(new UserProfile(1,"PROJECT"));
-		userProfileList.add(new UserProfile(1,"USERSs"));
+		userProfileList.add(new UserProfile(1,"USERS"));
 
 		//------- Create respones with user name and token and profile list -------
 		return ResponseEntity.ok(new JwtResponse(token,userdetail.getUsername(),userProfileList));
