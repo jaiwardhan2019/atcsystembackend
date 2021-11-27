@@ -1,6 +1,7 @@
 package com.atcportal.main.controller;
 
 import com.atcportal.main.models.UserDetail;
+import com.atcportal.main.models.UserProfile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,7 @@ import com.atcportal.main.service.JwtUserDetailsService;
 import com.atcportal.main.config.JwtTokenUtil;
 import com.atcportal.main.models.JwtResponse;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -41,23 +43,27 @@ public class JwtAuthenticationController {
 	* */
 	@RequestMapping(value = "/authenticate", method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody UserDetail userdetail) throws Exception {
+
 		userDetailsService.authenticate(userdetail.getUsername(), userdetail.getPassword());
 		final UserDetails userDetails = userDetailsService.loadUserByUsername(userdetail.getUsername());
 		final String token = jwtTokenUtil.generateToken(userDetails);
-		return ResponseEntity.ok(new JwtResponse(token,userdetail.getUsername()));
+
+
+		//------- Pull User Profile and load into a collection ------------
+		List<UserProfile> userProfileList = new ArrayList<>();
+		UserProfile userProfObj = new UserProfile(1,"DASHBOARD");
+		userProfileList.add(userProfObj);
+		userProfileList.add(new UserProfile(1,"PROJECT"));
+		userProfileList.add(new UserProfile(1,"PROFILE"));
+		userProfileList.add(new UserProfile(1,"ADMIN"));
+		userProfileList.add(new UserProfile(1,"PARTS"));
+		userProfileList.add(new UserProfile(1,"PROJECT"));
+		userProfileList.add(new UserProfile(1,"USERSs"));
+
+		//------- Create respones with user name and token and profile list -------
+		return ResponseEntity.ok(new JwtResponse(token,userdetail.getUsername(),userProfileList));
+
 	}
-
-
-	/*
-	 * Will take user id as input and return list of profile ()
-	 *
-	 * */
-	@RequestMapping(value = "/profile", method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> readUserProfile(@RequestBody UserDetail userdetail) throws Exception {
-		final UserDetails userDetails = userDetailsService.loadUserByUsername(userdetail.getUsername());
-		return ResponseEntity.ok(new JwtResponse("",userdetail.getUsername()));
-	}
-
 
 
 
