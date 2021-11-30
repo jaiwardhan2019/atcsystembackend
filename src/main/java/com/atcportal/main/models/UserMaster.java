@@ -6,19 +6,19 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "user_master")
-public class UserDetail {
+public class UserMaster {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long USER_ID;
+	@Column(name = "USER_ID")
+	private long userId;
 
-	@Column
+
+	@Column(name = "USERNAME")
 	private String username;
 
-	@Column
-	private String usercode;
 
-	@Column
+	@Column(name = "PASSWORD")
 	private String password;
 
 	public String getUsername() {
@@ -28,10 +28,6 @@ public class UserDetail {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-
-	public String getUsercode() { return usercode; 	}
-
-	public void setUsercode(String usercode) { 	this.usercode = usercode; }
 
 	public String getPassword() {
 		return password;

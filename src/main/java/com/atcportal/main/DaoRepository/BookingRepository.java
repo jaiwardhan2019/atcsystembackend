@@ -1,4 +1,4 @@
-package com.atcportal.main.repository;
+package com.atcportal.main.DaoRepository;
 
 import com.atcportal.main.models.Booking;
 import org.springframework.data.repository.CrudRepository;

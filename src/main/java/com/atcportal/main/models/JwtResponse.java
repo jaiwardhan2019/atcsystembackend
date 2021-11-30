@@ -10,7 +10,8 @@ public class JwtResponse implements Serializable {
 	private final String username;
 	private List<UserProfile> userProfileList;
 
-	public JwtResponse(String jwttoken, String username, List<UserProfile> userProfileList) {
+	//public JwtResponse(String jwttoken, String username, List<UserProfile> userProfileList) {
+	public JwtResponse(String jwttoken, String username) {
 		this.jwttoken = jwttoken;
 		this.username = username;
 		this.userProfileList = userProfileList;
