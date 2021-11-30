@@ -8,7 +8,7 @@ import com.atcportal.main.models.UserMaster;
 @Repository
 public interface UserDao extends CrudRepository<UserMaster, Integer> {
 	
-	UserMaster findByUsername(String loginid);
+	UserMaster findByUsername(String userlLogin);
 
 
 }

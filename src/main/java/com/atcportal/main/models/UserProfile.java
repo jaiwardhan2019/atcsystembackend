@@ -11,7 +11,9 @@ import java.util.Date;
 */
 
 @Entity
-@Table(name = "user_profile")
+
+@Table(name = "user_profile", uniqueConstraints = {
+		@UniqueConstraint(columnNames = "ID")})
 public class UserProfile {
 
 	@Id
@@ -19,12 +21,35 @@ public class UserProfile {
 	@Column(name="ID")
 	private int id;
 
+	@Column(name="USER_ID")
+	private int  userId;
 
-	@ManyToOne
-	private UserMaster usrObj;
+	@Column(name="PROFILE_ID")
+	private String profileId;
 
+	public String getProfileId() {
+		return profileId;
+	}
+
+	public void setProfileId(String profileId) {
+		this.profileId = profileId;
+	}
+
+
+	/*
 	@ManyToOne
-	private ProfileMaster profileObj;
+	private UserMaster UserMaster;
+
+	public com.atcportal.main.models.UserMaster getUserMaster() {
+		return UserMaster;
+	}
+
+	public void setUserMaster(com.atcportal.main.models.UserMaster userMaster) {
+		UserMaster = userMaster;
+	}
+   */
+
+
 
 
 	@Column(name="ADDED_DATE")
@@ -34,13 +59,7 @@ public class UserProfile {
 	@Column(name="ADDED_BY_USER_NAME")
 	private String addedByUserName;
 
-	public UserProfile(int id, UserMaster usrObj, ProfileMaster profileObj, Date addedDate, String addedByUserName) {
-		this.id = id;
-		this.usrObj = usrObj;
-		this.profileObj = profileObj;
-		this.addedDate = addedDate;
-		this.addedByUserName = addedByUserName;
-	}
+
 
 
 	public int getId() {
@@ -51,20 +70,12 @@ public class UserProfile {
 		this.id = id;
 	}
 
-	public UserMaster getUsrObj() {
-		return usrObj;
+	public int getUserId() {
+		return userId;
 	}
 
-	public void setUsrObj(UserMaster usrObj) {
-		this.usrObj = usrObj;
-	}
-
-	public ProfileMaster getProfileObj() {
-		return profileObj;
-	}
-
-	public void setProfileObj(ProfileMaster profileObj) {
-		this.profileObj = profileObj;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
 	public Date getAddedDate() {
@@ -82,6 +93,4 @@ public class UserProfile {
 	public void setAddedByUserName(String addedByUserName) {
 		this.addedByUserName = addedByUserName;
 	}
-
-
 }

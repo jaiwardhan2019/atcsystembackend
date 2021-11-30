@@ -3,6 +3,7 @@ package com.atcportal.main.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.atcportal.main.DaoRepository.UserProfileDao;
 import com.atcportal.main.models.UserProfile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -27,10 +28,12 @@ public class JwtUserDetailsService implements UserDetailsService {
 	@Autowired
 	private UserDao userDao;
 
-
+	@Autowired
+	private UserProfileDao profileDao;
 
 	@Autowired
 	private PasswordEncoder bcryptEncoder;
+
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -42,18 +45,21 @@ public class JwtUserDetailsService implements UserDetailsService {
 				new ArrayList<>());
 	}
 
-
-
-	public List<UserProfile> loadUserProfile(String username) throws UsernameNotFoundException {
 /*
-		List<UserProfile> userProfileList = usrProfileDao.listUserProfile(username);
+
+
+	//public List<Object[]> loadUserProfile(String username) throws UsernameNotFoundException {
+	public List<String> loadUserProfile(String username) throws UsernameNotFoundException {
+
+		//List<Object[]> userProfileList = profileDao.getUserProfileList();
+		List<String> userProfileList = profileDao.getUserProfileList();
 		if (userProfileList == null) {
 			throw new UsernameNotFoundException("No profile found for the username : " + username);
 		}
-		return userProfileList;*/
-		return null;
+		return userProfileList;
 	}
 
+*/
 
 
 

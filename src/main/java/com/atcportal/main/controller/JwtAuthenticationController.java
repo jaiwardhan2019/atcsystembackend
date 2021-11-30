@@ -53,6 +53,10 @@ public class JwtAuthenticationController {
 
 		//------- Pull User Profile and load into a collection ------------
 		//List<UserProfile> userProfileList = userDetailsService.loadUserProfile(userdetail.getUsername());
+		//List<Object[]> userProfileList = userDetailsService.loadUserProfile("test");
+		List<String> userProfileList = userDetailsService.loadUserProfile("test");
+		System.out.println("Here is Result:"+userProfileList.toString());
+
 /*
 		List<UserProfile> userProfileList = new ArrayList<>();
 		UserProfile userProfObj = new UserProfile(1,"DASHBOARD");
@@ -78,6 +82,23 @@ public class JwtAuthenticationController {
 	public ResponseEntity<?> saveUser(@RequestBody UserMaster user) throws Exception {
 		return ResponseEntity.ok(userDetailsService.save(user));
 	}
+
+
+
+
+
+
+	//----- Will register User to the DB With Encoded Password ----------
+	@RequestMapping(value = "/test", method = RequestMethod.POST)
+	public ResponseEntity<String> test() throws Exception {
+		return ResponseEntity.ok("Hi there ");
+	}
+
+
+
+
+
+
 
 
 

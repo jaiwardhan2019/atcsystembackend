@@ -4,12 +4,12 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "user_profile_master")
+@Table(name = "profile_master")
 public class ProfileMaster {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="PROFILE_ID")
+	@Column(name="ID")
 	private long profileId;
 
 
@@ -31,7 +31,31 @@ public class ProfileMaster {
 		this.addedDate = addedDate;
 	}
 
+	public long getProfileId() {
+		return profileId;
+	}
 
+	public String getMainMenu() {
+		return mainMenu;
+	}
 
+	public void setMainMenu(String mainMenu) {
+		this.mainMenu = mainMenu;
+	}
 
+	public String getSubMenu() {
+		return subMenu;
+	}
+
+	public void setSubMenu(String subMenu) {
+		this.subMenu = subMenu;
+	}
+
+	public Date getAddedDate() {
+		return addedDate;
+	}
+
+	public void setAddedDate(Date addedDate) {
+		this.addedDate = addedDate;
+	}
 }
