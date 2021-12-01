@@ -54,8 +54,8 @@ public class JwtAuthenticationController {
 		//------- Pull User Profile and load into a collection ------------
 		//List<UserProfile> userProfileList = userDetailsService.loadUserProfile(userdetail.getUsername());
 		//List<Object[]> userProfileList = userDetailsService.loadUserProfile("test");
-		List<String> userProfileList = userDetailsService.loadUserProfile("test");
-		System.out.println("Here is Result:"+userProfileList.toString());
+		//List<String> userProfileList = userDetailsService.loadUserProfile("test");
+		//System.out.println("Here is Result:"+userProfileList.toString());
 
 /*
 		List<UserProfile> userProfileList = new ArrayList<>();
