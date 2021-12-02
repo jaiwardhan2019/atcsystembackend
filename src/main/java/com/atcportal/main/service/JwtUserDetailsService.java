@@ -66,8 +66,11 @@ public class JwtUserDetailsService implements UserDetailsService {
 
 
 	//------ Save User And Encoded Password to the DataBase
-	public UserMaster save(UserMaster user) {
+	public UserMaster registerNewUser(UserMaster user) {
 		UserMaster newUser = new UserMaster();
+		newUser.setUserFullName(user.getUserFullName());
+		newUser.setUserEmailID(user.getUserEmailID());
+		newUser.setUserPhoneNo(user.getUserPhoneNo());
 		newUser.setUsername(user.getUsername());
 		newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
 		return userDao.save(newUser);

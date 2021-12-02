@@ -17,6 +17,19 @@ public class UserMaster {
 	@Column(name = "ID")
 	private long userId;
 
+	@Column(name = "NAME")
+	private String userFullName;
+
+	@Column(name = "EMAIL")
+	private String userEmailID;
+
+	@Column(name = "PHONENO")
+	private String userPhoneNo;
+
+
+	@Column(name = "ADDRESS")
+	private String userFullAddress;
+
 
 	@Column(name = "LOGINNAME")
 	private String username;
@@ -24,13 +37,59 @@ public class UserMaster {
 
 	@Column(name = "PASSWORD")
 	private String password;
-/*
 
 
+	@Column(name = "GDPRCONSENT")
+	private String gdprConsent;
+
+
+	// -------- All Getter and Setter ---------------
+
+	public String getUserFullName() {
+		return userFullName;
+	}
+
+	public void setUserFullName(String userFullName) {
+		this.userFullName = userFullName;
+	}
+
+	public String getUserEmailID() {
+		return userEmailID;
+	}
+
+	public void setUserEmailID(String userEmailID) {
+		this.userEmailID = userEmailID;
+	}
+
+	public String getUserPhoneNo() {
+		return userPhoneNo;
+	}
+
+	public void setUserPhoneNo(String userPhoneNo) {
+		this.userPhoneNo = userPhoneNo;
+	}
+
+	public String getUserFullAddress() {
+		return userFullAddress;
+	}
+
+	public void setUserFullAddress(String userFullAddress) {
+		this.userFullAddress = userFullAddress;
+	}
+
+	public String getGdprConsent() {
+		return gdprConsent;
+	}
+
+	public void setGdprConsent(String gdprConsent) {
+		this.gdprConsent = gdprConsent;
+	}
+
+	/*
 	@ManyToMany
 	@JoinTable(name = "user_profile", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "ID"))
 	private Set<UserProfile> userProfile = new HashSet<>();
-*/
+    */
 
 	public String getUsername() {
 		return username;
