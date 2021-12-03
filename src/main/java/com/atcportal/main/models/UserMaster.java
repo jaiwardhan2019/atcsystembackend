@@ -1,20 +1,20 @@
 package com.atcportal.main.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import javax.persistence.*;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "user_master",uniqueConstraints = { @UniqueConstraint(columnNames = "LOGINNAME") })
+@Table(name = "user_master",uniqueConstraints = { @UniqueConstraint(columnNames = "USERNAME") })
 public class UserMaster {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID")
+	@Column(name = "USER_ID")
 	private long userId;
 
 	@Column(name = "NAME")
@@ -31,7 +31,7 @@ public class UserMaster {
 	private String userFullAddress;
 
 
-	@Column(name = "LOGINNAME")
+	@Column(name = "USERNAME")
 	private String username;
 
 

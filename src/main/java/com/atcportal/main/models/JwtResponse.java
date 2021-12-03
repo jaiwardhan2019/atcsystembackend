@@ -8,10 +8,10 @@ public class JwtResponse implements Serializable {
 	private static final long serialVersionUID = -8091879091924046844L;
 	private final String jwttoken;
 	private final String username;
-	private List<UserProfile> userProfileList;
+	private List<Object[]> userProfileList;
 
 	//public JwtResponse(String jwttoken, String username, List<UserProfile> userProfileList) {
-	public JwtResponse(String jwttoken, String username) {
+	public JwtResponse(String jwttoken, String username, List<Object[]> userProfileList) {
 		this.jwttoken = jwttoken;
 		this.username = username;
 		this.userProfileList = userProfileList;
@@ -25,7 +25,7 @@ public class JwtResponse implements Serializable {
 		return this.username;
 	}
 
-	public List<UserProfile> getUserProfileList() {
+	public List<Object[]> getUserProfileList() {
 		return this.userProfileList;
 	}
 }

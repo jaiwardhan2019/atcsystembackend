@@ -2,10 +2,10 @@ package com.atcportal.main.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-import com.atcportal.main.DaoRepository.UserProfileDao;
-import com.atcportal.main.models.UserProfile;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -14,22 +14,23 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.security.authentication.AuthenticationManager;
 
 import com.atcportal.main.DaoRepository.UserDao;
+import com.atcportal.main.DaoRepository.UserProfileMasterDao;
 import com.atcportal.main.models.UserMaster;
+
 
 @Service
 public class JwtUserDetailsService implements UserDetailsService {
 
 	@Autowired
 	private AuthenticationManager authenticationManager;
-	
+
 	@Autowired
 	private UserDao userDao;
 
 	@Autowired
-	private UserProfileDao profileDao;
+	private UserProfileMasterDao userProfileMasterDao;
 
 	@Autowired
 	private PasswordEncoder bcryptEncoder;
@@ -41,25 +42,22 @@ public class JwtUserDetailsService implements UserDetailsService {
 		if (user == null) {
 			throw new UsernameNotFoundException("User not found with username: " + username);
 		}
-		return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
-				new ArrayList<>());
+		return new org.springframework.security.core.
+				userdetails.User(user.getUsername(), user.getPassword(),new ArrayList<>());
 	}
 
-/*
 
 
-	//public List<Object[]> loadUserProfile(String username) throws UsernameNotFoundException {
-	public List<String> loadUserProfile(String username) throws UsernameNotFoundException {
 
-		//List<Object[]> userProfileList = profileDao.getUserProfileList();
-		List<String> userProfileList = profileDao.getUserProfileList();
+	public List<Object[]> loadUserProfile(String username) throws UsernameNotFoundException {
+		List<Object[]> userProfileList = userProfileMasterDao.getUserProfileList(username);
 		if (userProfileList == null) {
 			throw new UsernameNotFoundException("No profile found for the username : " + username);
 		}
 		return userProfileList;
 	}
 
-*/
+
 
 
 
@@ -81,10 +79,8 @@ public class JwtUserDetailsService implements UserDetailsService {
 	public void authenticate(String username, String password) throws Exception {
 		try {
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
-		} catch (DisabledException e) {
-			throw new Exception("USER_DISABLED", e);
-		} catch (BadCredentialsException e) {
-			throw new Exception("INVALID_CREDENTIALS", e);
+		} catch (DisabledException e) { throw new Exception("USER_DISABLED", e); }
+		  catch (BadCredentialsException e) { throw new Exception("INVALID_CREDENTIALS", e);
 		}
 	}
 

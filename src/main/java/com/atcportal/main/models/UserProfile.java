@@ -4,11 +4,11 @@ import javax.persistence.*;
 import java.util.Date;
 
 /*
-* Author :  Jai Wardhan
-* Date   :  30 - Nov - 2021
-* https://www.dineshonjava.com/hibernate/hibernate-many-to-one-mapping-tutorial/s
-* https://stackoverflow.com/questions/56743810/how-to-join-3-tables-into-one-table-with-jpa
-*/
+ * Author :  Jai Wardhan
+ * Date   :  30 - Nov - 2021
+ * https://www.dineshonjava.com/hibernate/hibernate-many-to-one-mapping-tutorial/s
+ * https://stackoverflow.com/questions/56743810/how-to-join-3-tables-into-one-table-with-jpa
+ */
 
 @Entity
 

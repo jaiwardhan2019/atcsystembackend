@@ -37,44 +37,21 @@ public class JwtAuthenticationController {
 	private JwtUserDetailsService userDetailsService;
 
 
-
-
 	/*
-	* Authenticate User with the User ID and Password Saved in Database
-	* If the user is validated then create and return a token
-	* */
+	 * Authenticate User with the User ID and Password Saved in Database
+	 * If the user is validated then create and return a token
+	 * */
 	@RequestMapping(value = "/authenticate", method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody UserMaster userdetail) throws Exception {
 
 		userDetailsService.authenticate(userdetail.getUsername(), userdetail.getPassword());
+
 		final UserDetails userDetails = userDetailsService.loadUserByUsername(userdetail.getUsername());
 		final String token = jwtTokenUtil.generateToken(userDetails);
-
-
-		//------- Pull User Profile and load into a collection ------------
-		//List<UserProfile> userProfileList = userDetailsService.loadUserProfile(userdetail.getUsername());
-		//List<Object[]> userProfileList = userDetailsService.loadUserProfile("test");
-		//List<String> userProfileList = userDetailsService.loadUserProfile("test");
-		//System.out.println("Here is Result:"+userProfileList.toString());
-
-     /*
-		List<UserProfile> userProfileList = new ArrayList<>();
-		UserProfile userProfObj = new UserProfile(1,"DASHBOARD");
-		userProfileList.add(userProfObj);
-		userProfileList.add(new UserProfile(1,"PROJECT"));
-		userProfileList.add(new UserProfile(2,"PROFILE"));
-		userProfileList.add(new UserProfile(3,"ADMIN"));
-		userProfileList.add(new UserProfile(4,"PARTS"));
-		userProfileList.add(new UserProfile(5,"PROJECT"));
-		userProfileList.add(new UserProfile(6,"USERS"));
-      */
-
 		//------- Create respones with user name and token and profile list -------
-		//return ResponseEntity.ok(new JwtResponse(token,userdetail.getUsername(),userProfileObj));
-		return ResponseEntity.ok(new JwtResponse(token,userdetail.getUsername()));
+		return ResponseEntity.ok(new JwtResponse(token,userdetail.getUsername(), userDetailsService.loadUserProfile(userdetail.getUsername())));
 
 	}
-
 
 
 	//----- Will register User to the DB With Encoded Password ----------
@@ -82,23 +59,6 @@ public class JwtAuthenticationController {
 	public ResponseEntity<?> saveUser(@RequestBody UserMaster user) throws Exception {
 		return ResponseEntity.ok(userDetailsService.registerNewUser(user));
 	}
-
-
-
-
-
-
-	//----- Will register User to the DB With Encoded Password ----------
-	@RequestMapping(value = "/test", method = RequestMethod.POST)
-	public ResponseEntity<String> test() throws Exception {
-		return ResponseEntity.ok("Hi there ");
-	}
-
-
-
-
-
-
 
 
 
