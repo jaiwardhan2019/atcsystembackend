@@ -24,9 +24,9 @@ DROP TABLE IF EXISTS `booking`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `booking` (
   `booking_id` bigint NOT NULL AUTO_INCREMENT,
-  `departure` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `destination` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `psngr_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `departure` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `destination` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `psngr_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `travel_date` datetime DEFAULT NULL,
   PRIMARY KEY (`booking_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -71,6 +71,32 @@ INSERT INTO `part_master` VALUES (1,'IQV-50000-EXTENDED',' IQV-50000-Extended Po
 UNLOCK TABLES;
 
 --
+-- Table structure for table `profile_master`
+--
+
+DROP TABLE IF EXISTS `profile_master`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `profile_master` (
+  `PROFILE_ID` int NOT NULL AUTO_INCREMENT,
+  `MAIN_MENU` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `SUB_MENU` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `ADDED_DATE` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`PROFILE_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `profile_master`
+--
+
+LOCK TABLES `profile_master` WRITE;
+/*!40000 ALTER TABLE `profile_master` DISABLE KEYS */;
+INSERT INTO `profile_master` VALUES (1,'DASHBOARD','DASHBOARD','2021-11-26 17:00:14'),(2,'PROJECT','PROJECT','2021-11-26 17:00:14'),(3,'PROFILE','PROFILE','2021-11-26 17:00:14'),(4,'ADMIN','ADMIN','2021-11-26 17:00:14'),(5,'ADMIN','PARTS','2021-11-26 17:00:14'),(6,'ADMIN','PROJECT','2021-11-26 17:00:14'),(7,'ADMIN','USERS','2021-11-26 17:32:25');
+/*!40000 ALTER TABLE `profile_master` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `project_master`
 --
 
@@ -80,7 +106,7 @@ DROP TABLE IF EXISTS `project_master`;
 CREATE TABLE `project_master` (
   `PROJECTID` int NOT NULL AUTO_INCREMENT,
   `QUOTENUMBER` varchar(45) NOT NULL,
-  `REVISION` int NOT NULL DEFAULT '0',
+  `REVISION` int DEFAULT '0',
   `SITENAME` varchar(300) DEFAULT NULL,
   `POSTCODE` varchar(45) DEFAULT NULL,
   `ENGINNERNAME` varchar(100) DEFAULT NULL,
@@ -91,7 +117,9 @@ CREATE TABLE `project_master` (
   `CUSTOMERTYPE` varchar(100) DEFAULT NULL,
   `ORDERDATE` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `CHANCE` int DEFAULT NULL,
-  PRIMARY KEY (`PROJECTID`)
+  PRIMARY KEY (`PROJECTID`),
+  UNIQUE KEY `PROJECTID_UNIQUE` (`PROJECTID`),
+  UNIQUE KEY `QUOTENUMBER_UNIQUE` (`QUOTENUMBER`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -123,9 +151,11 @@ CREATE TABLE `user_master` (
   `PASSWORD` varchar(500) DEFAULT NULL,
   `GDPRCONSENT` varchar(1) DEFAULT 'Y',
   `GDPRCONSENT_DATE` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `ACTIVE` varchar(1) DEFAULT 'Y',
   PRIMARY KEY (`USER_ID`),
+  UNIQUE KEY `USER_ID_UNIQUE` (`USER_ID`),
   UNIQUE KEY `USERNAME_UNIQUE` (`USERNAME`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -134,7 +164,7 @@ CREATE TABLE `user_master` (
 
 LOCK TABLES `user_master` WRITE;
 /*!40000 ALTER TABLE `user_master` DISABLE KEYS */;
-INSERT INTO `user_master` VALUES (1,NULL,NULL,NULL,NULL,'2021-11-25 14:08:32','test','$2a$10$8tqIg9HJFQK.n3y.pyrxlOWTx9vNBWRm3jJDwTkxvEFfpSTNT1fR.',NULL,'2021-11-29 13:19:09'),(2,NULL,NULL,NULL,NULL,'2021-11-26 12:38:12','mohit','$2a$10$mbnx0iMjO7zd32IXU0r4SumI1FaZdDHuF..bfI6MeSUn1ABrRKQGe',NULL,'2021-11-29 13:19:09'),(28,NULL,NULL,NULL,NULL,'2021-11-30 11:55:51','mohit1','$2a$10$WAL8R6c492e1j.wy5z7BOODmpTjl5OVf/ZCCI2afSwpLwzvnHV0tO','Y','2021-11-30 11:55:51'),(30,NULL,NULL,NULL,NULL,'2021-11-30 13:45:04','mohit2','$2a$10$VFcfEzRGml4GOmeCwmlore97TKiD2frM6C4j2lSdBUdpmP94THOD.','Y','2021-11-30 13:45:04');
+INSERT INTO `user_master` VALUES (1,'Jai Wardhan ','test@test.com','898',NULL,'2021-12-02 17:22:15','test','$2a$10$cukp32yx2acQY4xLjIFns.LxWk.lANX9DHukQCFvoRYW8JxEqrXn.',NULL,'2021-12-02 17:22:15','Y'),(36,'Jai Wardhan','jai.wardhan2007@gmail.com','7423787234',NULL,'2021-12-02 16:50:30','jai','$2a$10$hNE2E14iM1FPGkUJv7PoveyoXP.9u98a/Ub1sT1CIj4nMqPJsaut.',NULL,'2021-12-02 16:50:30','Y'),(37,'Mohit Garg','mohit@mohit.com','321321321',NULL,'2021-12-02 16:51:28','mohit','$2a$10$UIcqH8706FKFK6OJAg8HHeyHgH.fUvhGZoAWIh9xH7k2fPIK1K.Fq',NULL,'2021-12-02 16:51:28','Y'),(38,'Dinesh G','dinesh@dinesh.com','321321321',NULL,'2021-12-02 16:51:48','dinesh','$2a$10$Wn3XqJA2pPuru13/GFy0kOSQrl6A7ybYDCCk6SaizkYc4EaajJQAm',NULL,'2021-12-02 16:51:48','Y'),(45,'Admin Admin','admin@admin.com','083276378',NULL,'2021-12-03 16:16:06','admin','$2a$10$ERuPXq9IV/JnNxK5Pi2RCuBYANrbEXWSTiq5L3nZe4Nnfl6nI3/F.',NULL,'2021-12-03 16:16:06','Y');
 /*!40000 ALTER TABLE `user_master` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -147,12 +177,13 @@ DROP TABLE IF EXISTS `user_profile`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user_profile` (
   `ID` int NOT NULL AUTO_INCREMENT,
-  `USERNAME` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `USER_ID` int DEFAULT NULL,
   `PROFILE_ID` int NOT NULL,
   `ADDED_DATE` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `ADDED_BY_USER_NAME` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `ADDED_BY_USER_NAME` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `ID_UNIQUE` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -161,34 +192,8 @@ CREATE TABLE `user_profile` (
 
 LOCK TABLES `user_profile` WRITE;
 /*!40000 ALTER TABLE `user_profile` DISABLE KEYS */;
-INSERT INTO `user_profile` VALUES (1,'test',1,'2021-11-27 12:10:24','0020'),(2,'test',2,'2021-11-27 12:10:24','0020'),(3,'test',3,'2021-11-27 12:12:52',NULL),(4,'test',5,'2021-11-27 12:12:52',NULL),(5,'test',6,'2021-11-27 12:12:52',NULL),(6,'test',7,'2021-11-27 12:13:01',NULL);
+INSERT INTO `user_profile` VALUES (1,1,1,'2021-11-27 12:10:24','0020'),(2,1,2,'2021-11-27 12:10:24','0020'),(3,1,3,'2021-11-27 12:12:52',NULL),(4,1,5,'2021-11-27 12:12:52',NULL),(5,1,6,'2021-11-27 12:12:52',NULL),(6,1,7,'2021-11-27 12:13:01',NULL),(7,45,1,'2021-12-03 16:17:24',NULL),(8,45,2,'2021-12-03 16:17:24',NULL),(9,45,3,'2021-12-03 16:17:24',NULL),(10,45,4,'2021-12-03 16:17:24',NULL),(11,37,1,'2021-12-03 16:42:04',NULL),(12,37,2,'2021-12-03 16:42:04',NULL),(13,37,3,'2021-12-03 16:42:04',NULL),(14,37,4,'2021-12-03 16:42:04',NULL),(15,37,5,'2021-12-03 16:42:04',NULL),(16,37,6,'2021-12-03 16:42:04',NULL),(17,37,7,'2021-12-03 16:42:04',NULL);
 /*!40000 ALTER TABLE `user_profile` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `user_profile_master`
---
-
-DROP TABLE IF EXISTS `user_profile_master`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `user_profile_master` (
-  `PROFILE_ID` int NOT NULL AUTO_INCREMENT,
-  `MAIN_MENU` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `SUB_MENU` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `ADDED_DATE` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`PROFILE_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `user_profile_master`
---
-
-LOCK TABLES `user_profile_master` WRITE;
-/*!40000 ALTER TABLE `user_profile_master` DISABLE KEYS */;
-INSERT INTO `user_profile_master` VALUES (1,'DASHBOARD','DASHBOARD','2021-11-26 17:00:14'),(2,'PROJECT','PROJECT','2021-11-26 17:00:14'),(3,'PROFILE','PROFILE','2021-11-26 17:00:14'),(4,'ADMIN','ADMIN','2021-11-26 17:00:14'),(5,'ADMIN','PARTS','2021-11-26 17:00:14'),(6,'ADMIN','PROJECT','2021-11-26 17:00:14'),(7,'ADMIN','USERS','2021-11-26 17:32:25');
-/*!40000 ALTER TABLE `user_profile_master` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -200,4 +205,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-30 13:49:16
+-- Dump completed on 2021-12-03 17:04:46

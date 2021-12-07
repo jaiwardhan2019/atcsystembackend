@@ -53,7 +53,19 @@
 			<version>8.0.13</version>
 		</dependency>
 
-        <!-- Jason Web token  Start  -->
+
+
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>31.0.1-jre</version>
+		</dependency>
+
+
+
+
+
+		<!-- Jason Web token  And Security  Start  -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>

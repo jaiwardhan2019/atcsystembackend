@@ -1,9 +1,9 @@
 package com.atcportal.main.service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
+import com.atcportal.main.DaoRepository.UserDao;
+import com.atcportal.main.DaoRepository.UserProfileMasterDao;
+import com.atcportal.main.models.UserMaster;
+import com.google.common.base.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -15,9 +15,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.atcportal.main.DaoRepository.UserDao;
-import com.atcportal.main.DaoRepository.UserProfileMasterDao;
-import com.atcportal.main.models.UserMaster;
+import java.util.*;
 
 
 @Service
@@ -49,12 +47,45 @@ public class JwtUserDetailsService implements UserDetailsService {
 
 
 
-	public List<Object[]> loadUserProfile(String username) throws UsernameNotFoundException {
+	public Map<String, String> loadUserProfile(String username) throws UsernameNotFoundException {
+
+
+		if (Strings.isNullOrEmpty(username)){
+			throw new UsernameNotFoundException("User Name is missing ..!!");
+		}
+
+
 		List<Object[]> userProfileList = userProfileMasterDao.getUserProfileList(username);
+
+		//---- Filter Object List and make------
+		String userid      = null;
+		String userName    = null;
+		String userEmail   = null;
+		String lastLoginDate = null;
+		String userProfile = null;
+
+		for (int i=0; i<userProfileList.size(); i++){
+			Object[] row = (Object[]) userProfileList.get(i);
+			List<String> elephantList = Arrays.asList(Arrays.toString(row).substring( 1, Arrays.toString(row).length() - 1 ).split("\\s*,\\s*"));
+			userid= elephantList.get(0);
+			userName =elephantList.get(1);
+			userEmail=elephantList.get(2);
+			lastLoginDate = elephantList.get(3);
+			if(userProfile == null){userProfile=elephantList.get(4);}
+			else{userProfile = userProfile + "," +elephantList.get(4);}
+		}
+
+		Map<String, String> userDetailWithProfile = new HashMap<String, String>();
+		userDetailWithProfile.put("userid", userid);
+		userDetailWithProfile.put("userName", userName);
+		userDetailWithProfile.put("userEmail", userEmail);
+		userDetailWithProfile.put("lastLoginDate", lastLoginDate);
+		userDetailWithProfile.put("userProfile", userProfile);
+
 		if (userProfileList == null) {
 			throw new UsernameNotFoundException("No profile found for the username : " + username);
 		}
-		return userProfileList;
+		return userDetailWithProfile;
 	}
 
 
@@ -65,6 +96,11 @@ public class JwtUserDetailsService implements UserDetailsService {
 
 	//------ Save User And Encoded Password to the DataBase
 	public UserMaster registerNewUser(UserMaster user) {
+
+		if (user.equals(null)) {
+			throw new UsernameNotFoundException("User details are Missing..!!:"+user);
+		}
+
 		UserMaster newUser = new UserMaster();
 		newUser.setUserFullName(user.getUserFullName());
 		newUser.setUserEmailID(user.getUserEmailID());

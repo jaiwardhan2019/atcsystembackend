@@ -1,15 +1,17 @@
 package com.atcportal.main.models;
 
 import javax.persistence.Embeddable;
+import java.util.Date;
 
 @Embeddable
 public class UserProfileMaster {
 	
-	public UserProfileMaster(String profileId, String name, String email, String mainMenu, String subMenu) {
+	public UserProfileMaster(String profileId, String name, String email, Date lastLoginDate, String mainMenu, String subMenu) {
 		super();
 		this.profileId = profileId;
 		this.name = name;
 		this.email = email;
+		this.lastLoginDate = lastLoginDate;
 		this.mainMenu = mainMenu;
 		this.subMenu = subMenu;
 	}
@@ -19,7 +21,9 @@ public class UserProfileMaster {
 	private String name;
 	
 	private String email;
-	
+
+	private Date lastLoginDate;
+
 	private String mainMenu;
 	
 	private String subMenu;
@@ -47,6 +51,10 @@ public class UserProfileMaster {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	public Date getLastLoginDate() { return lastLoginDate; 	}
+
+	public void setLastLoginDate(Date lastLoginDate) { 	this.lastLoginDate = lastLoginDate; }
 
 	public String getMainMenu() {
 		return mainMenu;
