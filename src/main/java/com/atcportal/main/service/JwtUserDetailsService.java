@@ -110,9 +110,14 @@ public class JwtUserDetailsService implements UserDetailsService {
 			newUser.setGdprConsent(user.getGdprConsent());
 			return userDao.save(newUser);
 
-		}catch (Exception e){
-			throw new Exception("Duplicate Login Name : # "+ user.getUsername() + " # Please Change the User Name..!!");
-
+		}
+		catch(Exception e)
+		{
+			String errorMessage=e.toString();
+			if(errorMessage.contains("USERNAME_UNIQUE")){errorMessage="Login Name :=> "+ user.getUsername() + " is allready in use ...!!";}
+			if(errorMessage.contains("EMAIL_UNIQUE")){errorMessage="Email ID :=> "+ user.getUserEmailID() + " is allready in use " +
+					" Please Correct your given Email ID or contact your Admin User to fix this issue...!!";}
+			throw new Exception(errorMessage);
 		}
 	}
 

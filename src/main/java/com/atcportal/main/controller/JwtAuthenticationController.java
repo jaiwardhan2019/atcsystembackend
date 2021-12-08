@@ -63,10 +63,6 @@ public class JwtAuthenticationController {
 	}
 
 
-
-
-
-
 	//----- Will register User to the DB With Encoded Password ----------
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public ResponseEntity<?> saveUser(@RequestBody UserMaster user) throws Exception {
