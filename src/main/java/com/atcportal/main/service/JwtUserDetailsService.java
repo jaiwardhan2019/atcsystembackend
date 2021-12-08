@@ -95,19 +95,25 @@ public class JwtUserDetailsService implements UserDetailsService {
 
 
 	//------ Save User And Encoded Password to the DataBase
-	public UserMaster registerNewUser(UserMaster user) {
+	public UserMaster registerNewUser(UserMaster user) throws Exception {
 
 		if (user.equals(null)) {
 			throw new UsernameNotFoundException("User details are Missing..!!:"+user);
 		}
+		try {
+			UserMaster newUser = new UserMaster();
+			newUser.setUserFullName(user.getUserFullName());
+			newUser.setUserEmailID(user.getUserEmailID());
+			newUser.setUserPhoneNo(user.getUserPhoneNo());
+			newUser.setUsername(user.getUsername());
+			newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
+			newUser.setGdprConsent(user.getGdprConsent());
+			return userDao.save(newUser);
 
-		UserMaster newUser = new UserMaster();
-		newUser.setUserFullName(user.getUserFullName());
-		newUser.setUserEmailID(user.getUserEmailID());
-		newUser.setUserPhoneNo(user.getUserPhoneNo());
-		newUser.setUsername(user.getUsername());
-		newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
-		return userDao.save(newUser);
+		}catch (Exception e){
+			throw new Exception("Duplicate Login Name : # "+ user.getUsername() + " # Please Change the User Name..!!");
+
+		}
 	}
 
 
