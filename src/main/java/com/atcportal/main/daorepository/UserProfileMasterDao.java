@@ -1,4 +1,4 @@
-package com.atcportal.main.DaoRepository;
+package com.atcportal.main.daorepository;
 
 import java.util.List;
 

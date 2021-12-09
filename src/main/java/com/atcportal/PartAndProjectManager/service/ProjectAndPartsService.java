@@ -1,4 +1,4 @@
-package com.atcportal.main.service;
+package com.atcportal.PartAndProjectManager.service;
 
 import com.atcportal.main.daorepository.UserDao;
 import com.atcportal.main.daorepository.UserProfileMasterDao;
@@ -19,19 +19,12 @@ import java.util.*;
 
 
 @Service
-public class JwtUserDetailsService implements UserDetailsService {
+public class ProjectAndPartsService implements UserDetailsService {
 
-	@Autowired
-	private AuthenticationManager authenticationManager;
 
 	@Autowired
 	private UserDao userDao;
 
-	@Autowired
-	private UserProfileMasterDao userProfileMasterDao;
-
-	@Autowired
-	private PasswordEncoder bcryptEncoder;
 
 
 	@Override
@@ -43,6 +36,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 		return new org.springframework.security.core.
 				userdetails.User(user.getUsername(), user.getPassword(),new ArrayList<>());
 	}
+/*
 
 
 
@@ -134,7 +128,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 			throw new UsernameNotFoundException("User details are Missing..!!:"+user);
 		}
 		try {
-
+			
 			UserMaster updateUser = userDao.findByUsername(user.getUsername());
 			updateUser.setUserFullName(user.getUserFullName());
 			updateUser.setUserEmailID(user.getUserEmailID());
@@ -171,6 +165,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 		}
 	}
 
+*/
 
 
 }

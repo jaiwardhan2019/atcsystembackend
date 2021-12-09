@@ -45,6 +45,7 @@ public class UserMaster {
 
 	// -------- All Getter and Setter ---------------
 
+
 	public String getUserFullName() {
 		return userFullName;
 	}

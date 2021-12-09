@@ -28,7 +28,7 @@ import java.util.Map;
 
 @RestController
 @CrossOrigin
-public class JwtAuthenticationController {
+public class JwtAuthManageUserController {
 
 
 	@Autowired
@@ -39,7 +39,7 @@ public class JwtAuthenticationController {
 
 
 	/*
-	 * Authenticate User with the User ID and Password Saved in Database
+	 * Authenticate User with the User Username and Password Saved in Database
 	 * If the user is validated then Create a new Token and pull the user detail along with their profile list
 	 * */
 	@RequestMapping(value = "/authenticate", method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
@@ -63,11 +63,24 @@ public class JwtAuthenticationController {
 	}
 
 
+
+
 	//----- Will register User to the DB With Encoded Password ----------
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public ResponseEntity<?> saveUser(@RequestBody UserMaster user) throws Exception {
 		return ResponseEntity.ok(userDetailsService.registerNewUser(user));
 	}
+
+
+
+
+	//----- Will Update User to the DB With Encoded Password ----------
+	@RequestMapping(value = "/updateuser", method = RequestMethod.POST)
+	public ResponseEntity<?> updateUser(@RequestBody UserMaster user) throws Exception {
+		return ResponseEntity.ok(userDetailsService.updateUser(user));
+	}
+
+
 
 
 

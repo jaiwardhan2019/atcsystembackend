@@ -6,7 +6,7 @@ package com.atcportal.main.controller;
 import java.util.Date;
 
 import com.atcportal.main.models.Booking;
-import com.atcportal.main.DaoRepository.BookingRepository;
+import com.atcportal.main.daorepository.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
