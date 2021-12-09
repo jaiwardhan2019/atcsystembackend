@@ -2,7 +2,9 @@ package com.atcportal.main.controller;
 
 import com.atcportal.main.models.UserMaster;
 import com.atcportal.main.models.UserProfile;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -37,6 +39,8 @@ public class JwtAuthManageUserController {
 	@Autowired
 	private JwtUserDetailsService userDetailsService;
 
+	//---------- Logger Initializer-------------------------------
+	private final Logger logger = Logger.getLogger(JwtAuthManageUserController.class);
 
 	/*
 	 * Authenticate User with the User Username and Password Saved in Database
@@ -52,6 +56,8 @@ public class JwtAuthManageUserController {
 
         //--- This will load User Profile for the Portal to populate Menu Sub menu  -----
 		Map<String, String> userDetailAndProfile = userDetailsService.loadUserProfile(userdetail.getUsername());
+
+		logger.info("USer is verified");
 
 		//------- Create respones with user name and token and profile list -------
 		return ResponseEntity.ok(new
