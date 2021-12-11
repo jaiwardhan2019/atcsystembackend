@@ -69,9 +69,12 @@ public class JwtUserDetailsService implements UserDetailsService {
 			userName =elephantList.get(1);
 			userEmail=elephantList.get(2);
 			lastLoginDate = elephantList.get(3);
-			if(userProfile == null){userProfile=elephantList.get(4);}
-			else{userProfile = userProfile + "," +elephantList.get(4);}
+			if(userProfile == null){userProfile=elephantList.get(5);}
+			else{userProfile = userProfile + "," +elephantList.get(5);}
 		}
+
+
+
 
 		//----- Final Data Format will be returned ----------
 		Map<String, String> userDetailWithProfile = new HashMap<String, String>();
