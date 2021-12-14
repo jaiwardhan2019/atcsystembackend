@@ -7,7 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-import java.util.Date;
 
 @Entity
 @Table(name = "user_master",uniqueConstraints = { @UniqueConstraint(columnNames = "USERNAME") })
@@ -43,38 +42,9 @@ public class UserMaster {
 	@Column(name = "GDPRCONSENT")
 	private String gdprConsent;
 
-	@Column(name = "LASTLOGINDATE")
-	private Date lastLoginDate;
 
-
-	@Column(name = "USERLOGINCOUNT")
-	private int userLoginCount;
 	// -------- All Getter and Setter ---------------
 
-
-	public int getUserLoginCount() {
-		return userLoginCount;
-	}
-
-	public void setUserLoginCount(int userLoginCount) {
-		this.userLoginCount = userLoginCount;
-	}
-
-	public Date getLastLoginDate() {
-		return lastLoginDate;
-	}
-
-	public void setLastLoginDate(Date lastLoginDate) {
-		this.lastLoginDate = lastLoginDate;
-	}
-
-	public long getUserId() {
-		return userId;
-	}
-
-	public void setUserId(long userId) {
-		this.userId = userId;
-	}
 
 	public String getUserFullName() {
 		return userFullName;

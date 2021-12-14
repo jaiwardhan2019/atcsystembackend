@@ -8,7 +8,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import com.atcportal.main.service.JwtUserDetailsService;
 
 
@@ -64,23 +68,6 @@ public class JwtAuthManageUserController {
 
 	}
 
-	@RequestMapping(value = "/user/{userId}", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> getUserDetailsByUserId(@PathVariable long userId) throws Exception {
-
-		final UserDetails userDetails = userDetailsService.loadUserByUserId(userId);
-		//--- This will load User Profile for the Portal to populate Menu Sub menu  -----
-		Map<String, String> userDetailAndProfile = userDetailsService.loadUserProfile(userDetails.getUsername());
-
-		logger.info("USer is verified");
-
-		//------- Create respones with user name and token and profile list -------
-		return ResponseEntity.ok(new
-				JwtResponse(userDetailAndProfile.get("userid"), userDetailAndProfile.get("userName"),
-				userDetailAndProfile.get("userEmail"),userDetailAndProfile.get("lastLoginDate"), userDetailAndProfile.get("userProfile"), "")
-		);
-
-
-	}
 
 
 
