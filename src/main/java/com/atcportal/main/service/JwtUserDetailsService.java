@@ -60,7 +60,8 @@ public class JwtUserDetailsService implements UserDetailsService {
 		String userName    = null;
 		String userEmail   = null;
 		String lastLoginDate = null;
-		String userProfile = null;
+		String userProfileMainMenu = null;
+		String userProfileAdmnSubMenu  = null;
 
 		for (int i=0; i<userProfileList.size(); i++){
 			Object[] row = (Object[]) userProfileList.get(i);
@@ -69,8 +70,32 @@ public class JwtUserDetailsService implements UserDetailsService {
 			userName =elephantList.get(1);
 			userEmail=elephantList.get(2);
 			lastLoginDate = elephantList.get(3);
-			if(userProfile == null){userProfile=elephantList.get(5);}
-			else{userProfile = userProfile + "," +elephantList.get(5);}
+
+			//--- Creating String for the main Menu..
+			if(userProfileMainMenu == null){
+				userProfileMainMenu=elephantList.get(4);
+			}
+			else
+				{
+					if(!userProfileMainMenu.contains(elephantList.get(4))) {
+						userProfileMainMenu = userProfileMainMenu + "," + elephantList.get(4);
+					}
+				}
+
+
+			//--- Creating String for the main Menu..
+			if(elephantList.get(4).equals("ADMIN") && userProfileAdmnSubMenu == null){
+				userProfileAdmnSubMenu=elephantList.get(5);
+			}
+			else
+			{
+				if(elephantList.get(4).equals("ADMIN") && (!userProfileAdmnSubMenu.contains(elephantList.get(5)))) {
+					userProfileAdmnSubMenu = userProfileAdmnSubMenu + "," + elephantList.get(5);
+				}
+			}
+
+
+
 		}
 
 
@@ -82,7 +107,8 @@ public class JwtUserDetailsService implements UserDetailsService {
 		userDetailWithProfile.put("userName", userName);
 		userDetailWithProfile.put("userEmail", userEmail);
 		userDetailWithProfile.put("lastLoginDate", lastLoginDate);
-		userDetailWithProfile.put("userProfile", userProfile);
+		userDetailWithProfile.put("userProfileMainMenu", userProfileMainMenu);
+		userDetailWithProfile.put("userProfileAdminSubMenu", userProfileAdmnSubMenu);
 
 
 		if (userProfileList == null) {

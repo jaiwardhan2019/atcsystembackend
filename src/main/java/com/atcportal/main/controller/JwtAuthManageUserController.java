@@ -1,10 +1,8 @@
 package com.atcportal.main.controller;
 
 import com.atcportal.main.models.UserMaster;
-import com.atcportal.main.models.UserProfile;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -25,7 +23,6 @@ import com.atcportal.main.service.JwtUserDetailsService;
 import com.atcportal.main.config.JwtTokenUtil;
 import com.atcportal.main.models.JwtResponse;
 
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -62,7 +59,7 @@ public class JwtAuthManageUserController {
 		//------- Create respones with user name and token and profile list -------
 		return ResponseEntity.ok(new
 				JwtResponse(userDetailAndProfile.get("userid"), userDetailAndProfile.get("userName"),
-				userDetailAndProfile.get("userEmail"),userDetailAndProfile.get("lastLoginDate"), userDetailAndProfile.get("userProfile"), token)
+				userDetailAndProfile.get("userEmail"),userDetailAndProfile.get("lastLoginDate"), userDetailAndProfile.get("userProfileMainMenu"), userDetailAndProfile.get("userProfileAdminSubMenu") , token)
 		);
 
 

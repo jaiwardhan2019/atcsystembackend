@@ -1,7 +1,6 @@
 package com.atcportal.main.models;
 
 import java.io.Serializable;
-import java.util.List;
 
 public class JwtResponse implements Serializable {
 
@@ -11,16 +10,26 @@ public class JwtResponse implements Serializable {
 	private final String userName;
 	private final String userEmail;
 	private final String lastLoginDate;
-	private final String userProfileList;
+	private final String userProfileMainMenu;
+	private final String userProfileAdminSubMenu;
 	private final String authToken;
 
-	public JwtResponse(String userId, String userName, String userEmail, String lastLoginDate, String userProfileList, String authToken) {
+	public JwtResponse(String userId, String userName, String userEmail, String lastLoginDate, String userProfileMainMenu, String userProfileAdminSubMenu, String authToken) {
 		this.userId = userId;
 		this.userName = userName;
 		this.userEmail = userEmail;
 		this.lastLoginDate = lastLoginDate;
-		this.userProfileList = userProfileList;
+		this.userProfileMainMenu = userProfileMainMenu;
+		this.userProfileAdminSubMenu = userProfileAdminSubMenu;
 		this.authToken = authToken;
+	}
+
+	public String getUserProfileMainMenu() {
+		return userProfileMainMenu;
+	}
+
+	public String getUserProfileSubMenu() {
+		return userProfileAdminSubMenu;
 	}
 
 	public static long getSerialVersionUID() {
@@ -44,7 +53,11 @@ public class JwtResponse implements Serializable {
 	}
 
 	public String getUserProfileList() {
-		return userProfileList;
+		return userProfileMainMenu;
+	}
+
+	public String getUserProfileAdminSubMenu() {
+		return userProfileAdminSubMenu;
 	}
 
 	public String getAuthToken() {
