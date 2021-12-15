@@ -2,7 +2,6 @@ package com.atcportal.main.service;
 
 import com.atcportal.main.daorepository.UserDao;
 import com.atcportal.main.daorepository.UserProfileDao;
-import com.atcportal.main.daorepository.UserProfileMasterDao;
 import com.atcportal.main.models.UserMaster;
 import com.atcportal.main.models.UserProfile;
 import com.atcportal.main.models.enums.UserProfileIDs;
@@ -34,11 +33,9 @@ public class JwtUserDetailsService implements UserDetailsService {
 	private UserProfileDao userProfileDao;
 
 	@Autowired
-	private UserProfileMasterDao userProfileMasterDao;
-
-	@Autowired
 	private PasswordEncoder bcryptEncoder;
 
+	boolean isUpdatedLoginCount = false;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -46,9 +43,12 @@ public class JwtUserDetailsService implements UserDetailsService {
 		if (user == null) {
 			throw new UsernameNotFoundException("User not found with username: " + username);
 		}
-		user.setUserLoginCount(user.getUserLoginCount()+1);
-		user.setLastLoginDate(new Date());
-		userDao.save(user);
+		if(!isUpdatedLoginCount) {
+			user.setUserLoginCount(user.getUserLoginCount() + 1);
+			user.setLastLoginDate(new Date());
+			userDao.save(user);
+			isUpdatedLoginCount = true;
+		}
 		return new org.springframework.security.core.
 				userdetails.User(user.getUsername(), user.getPassword(),new ArrayList<>());
 	}
@@ -69,7 +69,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 			throw new UsernameNotFoundException("User Name is missing ..!!");
 		}
 
-		List<Object[]> userProfileList = userProfileMasterDao.getUserProfileList(username);
+		List<Object[]> userProfileList = userProfileDao.getUserProfileList(username);
 
 		//---- Filter Object List and make------
 		String userid      = null;
@@ -145,10 +145,10 @@ public class JwtUserDetailsService implements UserDetailsService {
 	private void saveOrUpdateUserProfiles(UserMaster userMaster) {
 		if(userMaster != null && userMaster.getUserId() != 0) {
 			List<UserProfile> userProfiles = new ArrayList<>();
-			UserProfile userProfile = new UserProfile();
-			userProfile.setUserId(Integer.valueOf(userMaster.getUserId()+""));
-			userProfile.setAddedDate(new Date());
 			for (UserProfileIDs userProfileID : UserProfileIDs.values()) {
+				UserProfile userProfile = new UserProfile();
+				userProfile.setUserId(Integer.valueOf(userMaster.getUserId()+""));
+				userProfile.setAddedDate(new Date());
 				userProfile.setProfileId(userProfileID.getProfileId());
 				userProfiles.add(userProfile);
 			}
