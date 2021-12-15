@@ -1,8 +1,10 @@
 package com.atcportal.main.service;
 
 import com.atcportal.main.daorepository.UserDao;
-import com.atcportal.main.daorepository.UserProfileMasterDao;
+import com.atcportal.main.daorepository.UserProfileDao;
 import com.atcportal.main.models.UserMaster;
+import com.atcportal.main.models.UserProfile;
+import com.atcportal.main.models.enums.UserProfileIDs;
 import com.google.common.base.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -28,11 +30,12 @@ public class JwtUserDetailsService implements UserDetailsService {
 	private UserDao userDao;
 
 	@Autowired
-	private UserProfileMasterDao userProfileMasterDao;
+	private UserProfileDao userProfileDao;
 
 	@Autowired
 	private PasswordEncoder bcryptEncoder;
 
+	boolean isUpdatedLoginCount = false;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -40,11 +43,24 @@ public class JwtUserDetailsService implements UserDetailsService {
 		if (user == null) {
 			throw new UsernameNotFoundException("User not found with username: " + username);
 		}
+		if(!isUpdatedLoginCount) {
+			user.setUserLoginCount(user.getUserLoginCount() + 1);
+			user.setLastLoginDate(new Date());
+			userDao.save(user);
+			isUpdatedLoginCount = true;
+		}
 		return new org.springframework.security.core.
 				userdetails.User(user.getUsername(), user.getPassword(),new ArrayList<>());
 	}
 
-
+	public UserDetails loadUserByUserId(long userId) throws UsernameNotFoundException {
+		UserMaster user = userDao.findOne(Integer.valueOf(userId+""));
+		if (user == null) {
+			throw new UsernameNotFoundException("User not found with user id: " + userId);
+		}
+		return new org.springframework.security.core.
+				userdetails.User(user.getUsername(), user.getPassword(),new ArrayList<>());
+	}
 
 
 	public Map<String, String> loadUserProfile(String username) throws UsernameNotFoundException {
@@ -53,7 +69,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 			throw new UsernameNotFoundException("User Name is missing ..!!");
 		}
 
-		List<Object[]> userProfileList = userProfileMasterDao.getUserProfileList(username);
+		List<Object[]> userProfileList = userProfileDao.getUserProfileList(username);
 
 		//---- Filter Object List and make------
 		String userid      = null;
@@ -137,7 +153,9 @@ public class JwtUserDetailsService implements UserDetailsService {
 			newUser.setUsername(user.getUsername());
 			newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
 			newUser.setGdprConsent(user.getGdprConsent());
-			return userDao.save(newUser);
+			newUser = userDao.save(newUser);
+			saveOrUpdateUserProfiles(newUser);
+			return newUser;
 
 		}
 		catch(Exception e)
@@ -150,10 +168,20 @@ public class JwtUserDetailsService implements UserDetailsService {
 		}
 	}
 
+	private void saveOrUpdateUserProfiles(UserMaster userMaster) {
+		if(userMaster != null && userMaster.getUserId() != 0) {
+			List<UserProfile> userProfiles = new ArrayList<>();
+			for (UserProfileIDs userProfileID : UserProfileIDs.values()) {
+				UserProfile userProfile = new UserProfile();
+				userProfile.setUserId(Integer.valueOf(userMaster.getUserId()+""));
+				userProfile.setAddedDate(new Date());
+				userProfile.setProfileId(userProfileID.getProfileId());
+				userProfiles.add(userProfile);
+			}
+			userProfileDao.save(userProfiles);
+		}
 
-
-
-
+	}
 
 
 	//------ This will update User Deatil to the user_master Table
@@ -171,6 +199,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 			//updateUser.setUsername(user.getUsername());
 			//updateUser.setPassword(bcryptEncoder.encode(user.getPassword()));
 			//updateUser.setGdprConsent(user.getGdprConsent());
+			saveOrUpdateUserProfiles(updateUser);
 			return userDao.save(updateUser);
 
 		}
@@ -185,13 +214,6 @@ public class JwtUserDetailsService implements UserDetailsService {
 	}
 
 
-
-
-
-
-
-
-
 	public void authenticate(String username, String password) throws Exception {
 		try {
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
@@ -200,6 +222,28 @@ public class JwtUserDetailsService implements UserDetailsService {
 		}
 	}
 
+	public String manageUserProfile(int userId , int profileId , String action){
+		if ("ADD".equalsIgnoreCase(action)) {
+			UserProfile userProfile = new UserProfile();
+			userProfile.setProfileId(profileId+"");
+			userProfile.setUserId(userId);
+			//userProfile.setAddedByUserName();
+			userProfile.setAddedDate(new Date());
+			userProfileDao.save(userProfile);
+			return "Profile Added to the User..";
+		}else if("DEL".equalsIgnoreCase(action)) {
+			userProfileDao.deleteByUserIdAndProfileId(userId, profileId+"");
+			return "Profile Removed..";
+		}
+		return "FAILED";
+	}
 
+	public void deleteUserByUserId(long userId){
+		userDao.delete(Integer.valueOf(userId+""));
+		deleteUserProfilesByUserId(userId);
+	}
 
+	private void deleteUserProfilesByUserId(long userId) {
+		userProfileDao.delete(userProfileDao.findByUserId(Integer.valueOf(userId+"")));
+	}
 }
