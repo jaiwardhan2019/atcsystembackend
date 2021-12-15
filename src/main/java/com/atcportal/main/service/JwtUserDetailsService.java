@@ -89,7 +89,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 			}
 			else
 			{
-				if(elephantList.get(4).equals("ADMIN") && (!userProfileAdmnSubMenu.contains(elephantList.get(5)))) {
+				if(elephantList.get(4).equals("ADMIN") && (!elephantList.get(4).equals("admin")) && (!userProfileAdmnSubMenu.contains(elephantList.get(5)))) {
 					userProfileAdmnSubMenu = userProfileAdmnSubMenu + "," + elephantList.get(5);
 				}
 			}

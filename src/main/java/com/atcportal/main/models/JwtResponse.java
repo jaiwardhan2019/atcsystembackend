@@ -24,14 +24,6 @@ public class JwtResponse implements Serializable {
 		this.authToken = authToken;
 	}
 
-	public String getUserProfileMainMenu() {
-		return userProfileMainMenu;
-	}
-
-	public String getUserProfileSubMenu() {
-		return userProfileAdminSubMenu;
-	}
-
 	public static long getSerialVersionUID() {
 		return serialVersionUID;
 	}
@@ -52,7 +44,7 @@ public class JwtResponse implements Serializable {
 		return lastLoginDate;
 	}
 
-	public String getUserProfileList() {
+	public String getUserProfileMainMenu() {
 		return userProfileMainMenu;
 	}
 
