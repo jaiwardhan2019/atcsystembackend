@@ -61,6 +61,7 @@ public class JwtAuthManageUserController {
 
 	}
 
+/*
 	@RequestMapping(value = "/user/{userId}", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> getUserDetailsByUserId(@PathVariable long userId) throws Exception {
 
@@ -70,14 +71,14 @@ public class JwtAuthManageUserController {
 
 		logger.info("USer is verified");
 
-		//------- Create respones with user name and token and profile list -------
 		return ResponseEntity.ok(new
 				JwtResponse(userDetailAndProfile.get("userid"), userDetailAndProfile.get("userName"),
-				userDetailAndProfile.get("userEmail"),userDetailAndProfile.get("lastLoginDate"), userDetailAndProfile.get("userProfile"), "")
+				userDetailAndProfile.get("userEmail"),userDetailAndProfile.get("lastLoginDate"), userDetailAndProfile.get("userProfileMainMenu"), userDetailAndProfile.get("userProfileAdminSubMenu") , token)
 		);
 
 
 	}
+*/
 
 
 
