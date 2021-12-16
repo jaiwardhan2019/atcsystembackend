@@ -15,7 +15,8 @@ import java.util.List;
 public interface UserProfileDao extends JpaRepository<UserProfile,  Integer> {
 
     List<UserProfile> findByUserId(int userId);
-
+    //delete from user_profile where id=?
+    @Query("delete from UserProfile where userId=?1 and profileId=?2")
     void deleteByUserIdAndProfileId(int userId, String profileId);
 
     @Query(value = "Select user_profile.PROFILE_ID as profileId, user_master.NAME as name, user_master.EMAIL as email, "

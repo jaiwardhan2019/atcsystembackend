@@ -1,8 +1,10 @@
 package com.atcportal.main.controller;
 
+import com.atcportal.main.dto.request.UserProfileDto;
 import com.atcportal.main.models.UserMaster;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -61,7 +63,7 @@ public class JwtAuthManageUserController {
 
 	}
 
-/*
+
 	@RequestMapping(value = "/user/{userId}", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> getUserDetailsByUserId(@PathVariable long userId) throws Exception {
 
@@ -73,12 +75,12 @@ public class JwtAuthManageUserController {
 
 		return ResponseEntity.ok(new
 				JwtResponse(userDetailAndProfile.get("userid"), userDetailAndProfile.get("userName"),
-				userDetailAndProfile.get("userEmail"),userDetailAndProfile.get("lastLoginDate"), userDetailAndProfile.get("userProfileMainMenu"), userDetailAndProfile.get("userProfileAdminSubMenu") , token)
+				userDetailAndProfile.get("userEmail"),userDetailAndProfile.get("lastLoginDate"),
+				userDetailAndProfile.get("userProfileMainMenu"), userDetailAndProfile.get("userProfileAdminSubMenu") ,
+				null)
 		);
-
-
 	}
-*/
+
 
 
 
@@ -97,8 +99,19 @@ public class JwtAuthManageUserController {
 		return ResponseEntity.ok(userDetailsService.updateYourDetail(user));
 	}
 
+	//----- Will delete User from the DB With  ----------
+	@RequestMapping(value = "/user/{userId}", method = RequestMethod.DELETE)
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public ResponseEntity<?> deleteUserById(@PathVariable long userId) throws Exception {
+		userDetailsService.deleteUserByUserId(userId);
+		return ResponseEntity.noContent().build();
+	}
 
-
+	//----- Will manage User profile to the DB ----------
+	@RequestMapping(value = "/user/profile", method = RequestMethod.POST)
+	public ResponseEntity<?> manageUserProfile(@RequestBody UserProfileDto userProfileDto) throws Exception {
+		return ResponseEntity.ok(userDetailsService.manageUserProfile(userProfileDto));
+	}
 
 	//----- Will Update User Password in the DB With Encoded Password ----------
 	@RequestMapping(value = "/updateyourpassword", method = RequestMethod.POST)
