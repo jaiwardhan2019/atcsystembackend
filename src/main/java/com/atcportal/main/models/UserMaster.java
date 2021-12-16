@@ -116,11 +116,6 @@ public class UserMaster {
 		this.gdprConsent = gdprConsent;
 	}
 
-	/*
-	@ManyToMany
-	@JoinTable(name = "user_profile", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "ID"))
-	private Set<UserProfile> userProfile = new HashSet<>();
-    */
 
 	public String getUsername() {
 		return username;
