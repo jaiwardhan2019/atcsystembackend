@@ -2,6 +2,7 @@ package com.atcportal.main.service;
 
 import com.atcportal.main.daorepository.UserDao;
 import com.atcportal.main.daorepository.UserProfileDao;
+import com.atcportal.main.dto.request.UserProfileDto;
 import com.atcportal.main.models.UserMaster;
 import com.atcportal.main.models.UserProfile;
 import com.atcportal.main.models.enums.UserProfileIDs;
@@ -48,6 +49,8 @@ public class JwtUserDetailsService implements UserDetailsService {
 			user.setLastLoginDate(new Date());
 			userDao.save(user);
 			isUpdatedLoginCount = true;
+		}else{
+			isUpdatedLoginCount = false;
 		}
 		return new org.springframework.security.core.
 				userdetails.User(user.getUsername(), user.getPassword(),new ArrayList<>());
@@ -56,7 +59,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 
 	//---------- This will take user id(int) as parameter and display full detail -------
 	public UserDetails loadUserByUserId(long userId) throws UsernameNotFoundException {
-		UserMaster user = userDao.findOne(Integer.valueOf(userId+""));
+		UserMaster user = userDao.findOne(userId);
 		if (user == null) {
 			throw new UsernameNotFoundException("User not found with user id: " + userId);
 		}
@@ -245,17 +248,17 @@ public class JwtUserDetailsService implements UserDetailsService {
 
 
 
-	public String manageUserProfile(int userId , int profileId , String action){
-		if ("ADD".equalsIgnoreCase(action)) {
+	public String manageUserProfile(UserProfileDto userProfileDto){
+		if ("ADD".equalsIgnoreCase(userProfileDto.getAction())) {
 			UserProfile userProfile = new UserProfile();
-			userProfile.setProfileId(profileId+"");
-			userProfile.setUserId(userId);
+			userProfile.setProfileId(userProfileDto.getProfileId()+"");
+			userProfile.setUserId(userProfileDto.getUserId());
 			//userProfile.setAddedByUserName();
 			userProfile.setAddedDate(new Date());
 			userProfileDao.save(userProfile);
 			return "Profile Added to the User..";
-		}else if("DEL".equalsIgnoreCase(action)) {
-			userProfileDao.deleteByUserIdAndProfileId(userId, profileId+"");
+		}else if("DEL".equalsIgnoreCase(userProfileDto.getAction())) {
+			userProfileDao.deleteByUserIdAndProfileId(userProfileDto.getUserId(), userProfileDto.getProfileId()+"");
 			return "Profile Removed..";
 		}
 		return "FAILED..!!  Please try again..";
@@ -266,7 +269,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 
 
 	public void deleteUserByUserId(long userId){
-		userDao.delete(Integer.valueOf(userId+""));
+		userDao.delete(userId);
 		deleteUserProfilesByUserId(userId);
 	}
 
@@ -275,6 +278,5 @@ public class JwtUserDetailsService implements UserDetailsService {
 	private void deleteUserProfilesByUserId(long userId) {
 		userProfileDao.delete(userProfileDao.findByUserId(Integer.valueOf(userId+"")));
 	}
-
 
 }

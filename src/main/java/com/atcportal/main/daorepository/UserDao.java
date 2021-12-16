@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.atcportal.main.models.UserMaster;
 
 @Repository
-public interface UserDao extends CrudRepository<UserMaster, Integer> {
+public interface UserDao extends CrudRepository<UserMaster, Long> {
 	
 	UserMaster findByUsername(String userlLogin);
 
