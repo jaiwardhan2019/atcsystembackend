@@ -92,9 +92,18 @@ public class JwtAuthManageUserController {
 
 
 	//----- Will Update User to the DB With Encoded Password ----------
-	@RequestMapping(value = "/updateuser", method = RequestMethod.POST)
-	public ResponseEntity<?> updateUser(@RequestBody UserMaster user) throws Exception {
-		return ResponseEntity.ok(userDetailsService.updateUser(user));
+	@RequestMapping(value = "/updateyourdetail", method = RequestMethod.POST)
+	public ResponseEntity<?> updateYourDetail(@RequestBody UserMaster user) throws Exception {
+		return ResponseEntity.ok(userDetailsService.updateYourDetail(user));
+	}
+
+
+
+
+	//----- Will Update User Password in the DB With Encoded Password ----------
+	@RequestMapping(value = "/updateyourpassword", method = RequestMethod.POST)
+	public ResponseEntity<?> updateYourPassword(@RequestBody UserMaster user) throws Exception {
+		return ResponseEntity.ok(userDetailsService.updateYourPassword(user));
 	}
 
 

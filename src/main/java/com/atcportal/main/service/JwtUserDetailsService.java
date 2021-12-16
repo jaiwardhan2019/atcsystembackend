@@ -53,6 +53,8 @@ public class JwtUserDetailsService implements UserDetailsService {
 				userdetails.User(user.getUsername(), user.getPassword(),new ArrayList<>());
 	}
 
+
+	//---------- This will take user id(int) as parameter and display full detail -------
 	public UserDetails loadUserByUserId(long userId) throws UsernameNotFoundException {
 		UserMaster user = userDao.findOne(Integer.valueOf(userId+""));
 		if (user == null) {
@@ -61,6 +63,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 		return new org.springframework.security.core.
 				userdetails.User(user.getUsername(), user.getPassword(),new ArrayList<>());
 	}
+
 
 
 	public Map<String, String> loadUserProfile(String username) throws UsernameNotFoundException {
@@ -99,7 +102,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 				}
 
 
-			//--- Creating String for the main Menu..
+			//--- Creating String for the Administration Sub Menu ..
 			if(elephantList.get(4).equals("ADMIN") && userProfileAdmnSubMenu == null){
 				userProfileAdmnSubMenu=elephantList.get(5);
 			}
@@ -110,11 +113,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 				}
 			}
 
-
-
 		}
-
-
 
 
 		//----- Final Data Format will be returned ----------
@@ -132,8 +131,6 @@ public class JwtUserDetailsService implements UserDetailsService {
 		}
 		return userDetailWithProfile;
 	}
-
-
 
 
 
@@ -161,13 +158,17 @@ public class JwtUserDetailsService implements UserDetailsService {
 		catch(Exception e)
 		{
 			String errorMessage=e.toString();
-			if(errorMessage.contains("USERNAME_UNIQUE")){errorMessage="Login Name :=> "+ user.getUsername() + " is allready in use ...!!";}
-			if(errorMessage.contains("EMAIL_UNIQUE")){errorMessage="Email ID :=> "+ user.getUserEmailID() + " is allready in use " +
+			if(errorMessage.contains("USERNAME_UNIQUE")){errorMessage="Login Name :# "+ user.getUsername() + " is allready in use ...!!";}
+			if(errorMessage.contains("EMAIL_UNIQUE")){errorMessage="Email ID :# "+ user.getUserEmailID() + " is allready in use " +
 					" Please Correct your given Email ID or contact your Admin User to fix this issue...!!";}
 			throw new Exception(errorMessage);
 		}
 	}
 
+
+
+
+	//--- This function is going to update table user_profile
 	private void saveOrUpdateUserProfiles(UserMaster userMaster) {
 		if(userMaster != null && userMaster.getUserId() != 0) {
 			List<UserProfile> userProfiles = new ArrayList<>();
@@ -184,8 +185,11 @@ public class JwtUserDetailsService implements UserDetailsService {
 	}
 
 
+
+
+
 	//------ This will update User Deatil to the user_master Table
-	public UserMaster updateUser(UserMaster user) throws Exception {
+	public UserMaster updateYourDetail(UserMaster user) throws Exception {
 
 		if (user.equals(null)) {
 			throw new UsernameNotFoundException("User details are Missing..!!:"+user);
@@ -196,24 +200,39 @@ public class JwtUserDetailsService implements UserDetailsService {
 			updateUser.setUserFullName(user.getUserFullName());
 			updateUser.setUserEmailID(user.getUserEmailID());
 			updateUser.setUserPhoneNo(user.getUserPhoneNo());
-			//updateUser.setUsername(user.getUsername());
-			//updateUser.setPassword(bcryptEncoder.encode(user.getPassword()));
-			//updateUser.setGdprConsent(user.getGdprConsent());
-			saveOrUpdateUserProfiles(updateUser);
+			updateUser.setUserFullAddress(user.getUserFullAddress());
+			updateUser.setGdprConsent(user.getGdprConsent());
 			return userDao.save(updateUser);
 
 		}
-		catch(Exception e)
-		{
-			String errorMessage=e.toString();
-			if(errorMessage.contains("USERNAME_UNIQUE")){errorMessage="Login Name :=> "+ user.getUsername() + " is allready in use ...!!";}
-			if(errorMessage.contains("EMAIL_UNIQUE")){errorMessage="Email ID :=> "+ user.getUserEmailID() + " is allready in use " +
-					" Please Correct your given Email ID or contact your Admin User to fix this issue...!!";}
-			throw new Exception(errorMessage);
-		}
+		catch(Exception errorMessage){	throw new Exception(errorMessage);}
 	}
 
 
+
+
+	//------ This will update User Deatil to the user_master Table
+	public UserMaster updateYourPassword(UserMaster user) throws Exception {
+		if (user.equals(null)) {
+			throw new UsernameNotFoundException("User details are Missing..!!:"+user);
+		}
+		try{
+			UserMaster updateUser = userDao.findByUsername(user.getUsername());
+			updateUser.setPassword(bcryptEncoder.encode(user.getPassword()));
+			return userDao.save(updateUser);
+		}
+		catch(Exception errorMessage){	throw new Exception(errorMessage);}
+	}
+
+
+
+
+
+
+
+
+
+	//--- Will Validate User detail with DB.
 	public void authenticate(String username, String password) throws Exception {
 		try {
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
@@ -221,6 +240,10 @@ public class JwtUserDetailsService implements UserDetailsService {
 		  catch (BadCredentialsException e) { throw new Exception("INVALID_CREDENTIALS", e);
 		}
 	}
+
+
+
+
 
 	public String manageUserProfile(int userId , int profileId , String action){
 		if ("ADD".equalsIgnoreCase(action)) {
@@ -235,15 +258,23 @@ public class JwtUserDetailsService implements UserDetailsService {
 			userProfileDao.deleteByUserIdAndProfileId(userId, profileId+"");
 			return "Profile Removed..";
 		}
-		return "FAILED";
+		return "FAILED..!!  Please try again..";
 	}
+
+
+
+
 
 	public void deleteUserByUserId(long userId){
 		userDao.delete(Integer.valueOf(userId+""));
 		deleteUserProfilesByUserId(userId);
 	}
 
+
+
 	private void deleteUserProfilesByUserId(long userId) {
 		userProfileDao.delete(userProfileDao.findByUserId(Integer.valueOf(userId+"")));
 	}
+
+
 }

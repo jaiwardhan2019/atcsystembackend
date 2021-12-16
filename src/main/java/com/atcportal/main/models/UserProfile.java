@@ -7,7 +7,7 @@ import java.util.Date;
  * Author :  Jai Wardhan
  * Date   :  30 - Nov - 2021
  * https://www.dineshonjava.com/hibernate/hibernate-many-to-one-mapping-tutorial/s
- * https://stackoverflow.com/questions/56743810/how-to-join-3-tables-into-one-table-with-jpa
+ *
  */
 
 @Entity
@@ -34,22 +34,6 @@ public class UserProfile {
 	public void setProfileId(String profileId) {
 		this.profileId = profileId;
 	}
-
-
-	/*
-	@ManyToOne
-	private UserMaster UserMaster;
-
-	public com.atcportal.main.models.UserMaster getUserMaster() {
-		return UserMaster;
-	}
-
-	public void setUserMaster(com.atcportal.main.models.UserMaster userMaster) {
-		UserMaster = userMaster;
-	}
-   */
-
-
 
 
 	@Column(name="ADDED_DATE")

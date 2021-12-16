@@ -31,7 +31,7 @@ public class partsAndProjectController {
 	//----- Will Update User to the DB With Encoded Password ----------
 	@RequestMapping(value = "/viewproject", method = RequestMethod.POST)
 	public ResponseEntity<?> updateUser(@RequestBody UserMaster user) throws Exception {
-		return ResponseEntity.ok(userDetailsService.updateUser(user));
+		return ResponseEntity.ok(userDetailsService.updateYourDetail(user));
 	}
 
 
