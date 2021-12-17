@@ -1,5 +1,6 @@
 package com.atcportal.main.service;
 
+import com.atcportal.main.controller.JwtAuthManageUserController;
 import com.atcportal.main.daorepository.UserDao;
 import com.atcportal.main.daorepository.UserProfileDao;
 import com.atcportal.main.dto.request.UserProfileDto;
@@ -7,6 +8,7 @@ import com.atcportal.main.models.UserMaster;
 import com.atcportal.main.models.UserProfile;
 import com.atcportal.main.models.enums.UserProfileIDs;
 import com.google.common.base.Strings;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -38,6 +40,12 @@ public class JwtUserDetailsService implements UserDetailsService {
 
 	boolean isUpdatedLoginCount = false;
 
+
+	//---------- Logger Initializer-------------------------------
+	private final Logger logger = Logger.getLogger(JwtAuthManageUserController.class);
+
+
+
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		UserMaster user = userDao.findByUsername(username);
@@ -57,6 +65,8 @@ public class JwtUserDetailsService implements UserDetailsService {
 	}
 
 
+
+	//TODO  Here response type should be UserMaster along with the UserProfile
 	//---------- This will take user id(int) as parameter and display full detail -------
 	public UserDetails loadUserByUserId(long userId) throws UsernameNotFoundException {
 		UserMaster user = userDao.findOne(userId);
@@ -66,6 +76,20 @@ public class JwtUserDetailsService implements UserDetailsService {
 		return new org.springframework.security.core.
 				userdetails.User(user.getUsername(), user.getPassword(),new ArrayList<>());
 	}
+
+
+
+
+	//---------- This will take loginName  as parameter and display full detail Of User -------
+	public UserMaster showMyDetail(String  userLoginName) throws UsernameNotFoundException {
+		UserMaster userDetail = userDao.findByUsername(userLoginName);
+		if (userDetail == null) {
+			throw new UsernameNotFoundException("User not found with loginName : " + userDetail);
+		}
+		return userDetail;
+	}
+
+
 
 
 
@@ -155,6 +179,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 			newUser.setGdprConsent(user.getGdprConsent());
 			newUser = userDao.save(newUser);
 			saveOrUpdateUserProfiles(newUser);
+			logger.info(user.getUserFullName()+" : Registered on # "+new Date());
 			return newUser;
 
 		}
@@ -222,6 +247,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 		try{
 			UserMaster updateUser = userDao.findByUsername(user.getUsername());
 			updateUser.setPassword(bcryptEncoder.encode(user.getPassword()));
+			logger.info(user.getUserFullName()+" : Password is Changed # "+new Date());
 			return userDao.save(updateUser);
 		}
 		catch(Exception errorMessage){	throw new Exception(errorMessage);}
@@ -229,6 +255,17 @@ public class JwtUserDetailsService implements UserDetailsService {
 
 
 
+
+
+	//------ This will update User Deatil to the user_master Table
+	public List<UserMaster> getallUserList() throws Exception {
+		try{
+			//List<UserMaster> listAllUser = userDao.listAllUsers();
+			List<UserMaster> listAllUser = (List<UserMaster>) userDao.findAll();
+			return listAllUser;
+		}
+		catch(Exception errorMessage){	throw new Exception(errorMessage);}
+	}
 
 
 
@@ -271,6 +308,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 	public void deleteUserByUserId(long userId){
 		userDao.delete(userId);
 		deleteUserProfilesByUserId(userId);
+		logger.info(userId +" : Removed on # "+new Date());
 	}
 
 
