@@ -2,6 +2,7 @@
 package com.atcportal.main.config;
 
 
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
@@ -12,9 +13,8 @@ import org.springframework.context.annotation.PropertySources;
 
 //@ComponentScan(basePackages = { "com.linkportal.docmanager","com.linkportal.security.UserSecurityLdapDatabase","com.flightreports.dbripostry.flightReports"})
 //@ComponentScan(basePackages = { "org.springframework.mail.javamail.JavaMailSender" })
-//@ComponentScan(basePackages = { "org.apache.velocity.app.VelocityEngine")
 
-
+//@ComponentScan(basePackages = { "com.atcportal.PartAndProjectManager"})
 @Configuration
 public class InfrastructureConfig {
       
