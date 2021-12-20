@@ -16,7 +16,7 @@ public class ProjectAndPartsController {
     @Autowired
     ProjectAndPartsService  projPartsServObj;
 
-    //----- Will register User to the DB With Encoded Password ----------
+    //----- First Screen of Create Project   ----------
     @RequestMapping(value = "/createnewproject_01", method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> createNewProject(@RequestBody ProjectMaster projObj) throws projectExceptionMaster {
         return ResponseEntity.ok(projPartsServObj.createNewProjectStep_01(projObj));
@@ -24,12 +24,20 @@ public class ProjectAndPartsController {
 
 
 
-    //----- Will register User to the DB With Encoded Password ----------
+    //----- Get all project from the table project_master  ----------
     @RequestMapping(value = "/listallproject", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> listAllProject() throws projectExceptionMaster {
         return ResponseEntity.ok(projPartsServObj.listAllProject());
     }
 
+
+
+
+    //----- Get all Parts list from the table  parts_master----------
+    @RequestMapping(value = "/listallparts", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> listAllParts() throws projectExceptionMaster {
+        return ResponseEntity.ok(projPartsServObj.listAllParts());
+    }
 
 
 
