@@ -2,11 +2,12 @@ package com.atcportal.PartAndProjectManager.service;
 
 import com.atcportal.PartAndProjectManager.customexception.projectExceptionMaster;
 
+import com.atcportal.PartAndProjectManager.daorepository.PartsDao;
+import com.atcportal.PartAndProjectManager.models.PartsMaster;
 import com.atcportal.PartAndProjectManager.models.ProjectMaster;
-import com.atcportal.PartAndProjectManager.daorepository.ProjectAndPartsDao;
+import com.atcportal.PartAndProjectManager.daorepository.ProjectDao;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -17,8 +18,11 @@ public class ProjectAndPartsServiceImp implements ProjectAndPartsService {
 
 
 	@Autowired
-	private ProjectAndPartsDao projectDao;
+	private ProjectDao projectDao;
 
+
+	@Autowired
+	private PartsDao partsDao;
 
 
 	//---------- Logger Initializer-------------------------------
@@ -48,9 +52,7 @@ public class ProjectAndPartsServiceImp implements ProjectAndPartsService {
 
 		catch(Exception projEx){
 			String errorMessage=projEx.toString();
-			//if(errorMessage.contains("USERNAME_UNIQUE")){errorMessage="Login Name :# "+ user.getUsername() + " is allready in use ...!!";}
-			//if(errorMessage.contains("EMAIL_UNIQUE")){errorMessage="Email ID :# "+ user.getUserEmailID() + " is allready in use " +
-			//		" Please Correct your given Email ID or contact your Admin User to fix this issue...!!";}
+			logger.error(errorMessage);
 			throw new projectExceptionMaster(errorMessage);
 		}
 
@@ -67,6 +69,32 @@ public class ProjectAndPartsServiceImp implements ProjectAndPartsService {
 	public ProjectMaster viewProjectBasicDetail(int projectId) {
 
 		return null;
+	}
+
+
+
+
+
+
+
+
+
+	/**
+	 * All Part related Service
+	 * Date : 20-Dec-2021
+	 */
+
+	//------- Create New Parts
+	@Override
+	public PartsMaster createNewPart(PartsMaster partObj) {
+		return null;
+	}
+
+
+	//------- List All Parts from Database
+	@Override
+	public List<PartsMaster> listAllParts() {
+		return (List<PartsMaster>) partsDao.findAll();
 	}
 
 
