@@ -35,20 +35,6 @@ public class SpringBootJpaSpringDataApplicationTests {
 
 
 
-/*
-
-	@Test
-	public void TestCreateNewProjectService() throws projectExceptionMaster {
-
-		ProjectMaster projMaster = new ProjectMaster();
-		projMaster.setProjectName("Test Project");
-		projMaster.setQuoteNumber("093028-38298-22");
-		projMaster.setEnginerName("Jai Wardhan");
-		objProjService.createNewProjectBasicDetail(projMaster);
-
-	}
-*/
-
 
 
 

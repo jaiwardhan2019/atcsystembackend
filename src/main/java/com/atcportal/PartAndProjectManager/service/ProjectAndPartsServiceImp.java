@@ -7,11 +7,12 @@ import com.atcportal.PartAndProjectManager.daorepository.ProjectAndPartsDao;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 
-@Repository
+@Service
 public class ProjectAndPartsServiceImp implements ProjectAndPartsService {
 
 
@@ -34,11 +35,15 @@ public class ProjectAndPartsServiceImp implements ProjectAndPartsService {
 			ProjectMaster newProject = new ProjectMaster();
 			newProject.setProjectName(projObj.getProjectName());
 			newProject.setQuoteNumber(projObj.getQuoteNumber());
+			newProject.setRevisionNo(projObj.getRevisionNo());
+			newProject.setSiteName(projObj.getSiteName());
+			newProject.setProjectEstPrice(projObj.getProjectEstPrice());
 			newProject.setEnginerName(projObj.getEnginerName());
 			newProject = projectDao.save(projObj);
 			logger.info("New Project # "+projObj.getProjectName()+" : Create By # "+ projObj.getEnginerName()+ " On # "+new Date());
 			return newProject;
 		}
+
 
 		catch(Exception projEx){
 			String errorMessage=projEx.toString();
@@ -49,6 +54,12 @@ public class ProjectAndPartsServiceImp implements ProjectAndPartsService {
 		}
 
 	}
+
+	@Override
+	public List<ProjectMaster> listAllProject() {
+		return (List<ProjectMaster>) projectDao.findAll();
+	}
+
 
 
 	@Override

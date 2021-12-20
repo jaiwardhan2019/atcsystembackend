@@ -1,5 +1,7 @@
 package com.atcportal.PartAndProjectManager.models;
 
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -13,7 +15,7 @@ public class ProjectMaster {
 	private int projectId;
 
 
-	@Column(name = "NAME")
+	@Column(name = "PROJECTNAME")
 	private String projectName;
 
 
@@ -56,7 +58,7 @@ public class ProjectMaster {
 	@Column(name = "CUSTOMERTYPE")
 	private String cusgtomerType;
 
-
+	@UpdateTimestamp
 	@Column(name = "ORDERDATE")
 	private Date orderDate;
 
@@ -64,6 +66,12 @@ public class ProjectMaster {
 	@Column(name = "POSSIBLITYCHANCE")
 	private String possiblityChance;
 
+
+	@Column(name = "PROJECTSTATUS")
+	private String projectStatus;
+
+	@Column(name = "ESTPRICE")
+	private double projectEstPrice;
 
 
 	//------ All Getter and Setter -----------
@@ -74,6 +82,7 @@ public class ProjectMaster {
 	public void setProjectId(int projectId) {
 		this.projectId = projectId;
 	}
+
 	public String getProjectName() {
 		return projectName;
 	}
@@ -86,7 +95,9 @@ public class ProjectMaster {
 		return quoteNumber;
 	}
 
-	public void setQuoteNumber(String quoteNumber) { this.quoteNumber = quoteNumber; }
+	public void setQuoteNumber(String quoteNumber) {
+		this.quoteNumber = quoteNumber;
+	}
 
 	public int getRevisionNo() {
 		return revisionNo;
@@ -100,13 +111,17 @@ public class ProjectMaster {
 		return siteName;
 	}
 
-	public void setSiteName(String siteName) { 	this.siteName = siteName; 	}
+	public void setSiteName(String siteName) {
+		this.siteName = siteName;
+	}
 
 	public String getPostCode() {
 		return postCode;
 	}
 
-	public void setPostCode(String postCode) {  this.postCode = postCode; }
+	public void setPostCode(String postCode) {
+		this.postCode = postCode;
+	}
 
 	public String getEnginerName() {
 		return enginerName;
@@ -152,7 +167,9 @@ public class ProjectMaster {
 		return cusgtomerType;
 	}
 
-	public void setCusgtomerType(String cusgtomerType) { this.cusgtomerType = cusgtomerType; }
+	public void setCusgtomerType(String cusgtomerType) {
+		this.cusgtomerType = cusgtomerType;
+	}
 
 	public Date getOrderDate() {
 		return orderDate;
@@ -169,5 +186,22 @@ public class ProjectMaster {
 	public void setPossiblityChance(String possiblityChance) {
 		this.possiblityChance = possiblityChance;
 	}
+
+	public String getProjectStatus() {
+		return projectStatus;
+	}
+
+	public void setProjectStatus(String projectStatus) {
+		this.projectStatus = projectStatus;
+	}
+
+	public double getProjectEstPrice() {
+		return projectEstPrice;
+	}
+
+	public void setProjectEstPrice(double projectEstPrice) {
+		this.projectEstPrice = projectEstPrice;
+	}
+
 
 }

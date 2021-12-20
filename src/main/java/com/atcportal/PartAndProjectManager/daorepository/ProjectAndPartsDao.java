@@ -5,7 +5,9 @@ import com.atcportal.main.models.UserMaster;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-@Repository
+import java.util.List;
+
+
 public interface ProjectAndPartsDao extends CrudRepository<ProjectMaster, Integer> {
 
     ProjectMaster findByProjectName(String projectName);

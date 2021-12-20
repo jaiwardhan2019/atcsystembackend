@@ -260,7 +260,6 @@ public class JwtUserDetailsService implements UserDetailsService {
 	//------ This will update User Deatil to the user_master Table
 	public List<UserMaster> getallUserList() throws Exception {
 		try{
-			//List<UserMaster> listAllUser = userDao.listAllUsers();
 			List<UserMaster> listAllUser = (List<UserMaster>) userDao.findAll();
 			return listAllUser;
 		}

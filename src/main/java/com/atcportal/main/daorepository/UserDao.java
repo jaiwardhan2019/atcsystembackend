@@ -12,6 +12,5 @@ public interface UserDao extends CrudRepository<UserMaster, Long> {
 	
 	UserMaster findByUsername(String userlLogin);
 
-	//List<UserMaster> listAllUsers();
 
 }
