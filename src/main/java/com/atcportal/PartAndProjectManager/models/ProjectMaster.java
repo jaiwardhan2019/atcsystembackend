@@ -35,6 +35,10 @@ public class ProjectMaster {
 	private String postCode;
 
 
+	@Column(name = "ENGINERID")
+	private int enginerId;
+
+
 	@Column(name = "ENGINERNAME")
 	private String enginerName;
 
@@ -130,6 +134,10 @@ public class ProjectMaster {
 	public void setEnginerName(String enginerName) {
 		this.enginerName = enginerName;
 	}
+
+	public int getEnginerId() { 	return enginerId; }
+
+	public void setEnginerId(int enginerId) { this.enginerId = enginerId; }
 
 	public String getQuoteType() {
 		return quoteType;

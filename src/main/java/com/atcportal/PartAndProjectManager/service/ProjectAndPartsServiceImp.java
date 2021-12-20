@@ -42,6 +42,7 @@ public class ProjectAndPartsServiceImp implements ProjectAndPartsService {
 			newProject.setRevisionNo(projObj.getRevisionNo());
 			newProject.setSiteName(projObj.getSiteName());
 			newProject.setEnginerName(projObj.getEnginerName());
+			newProject.setEnginerId(projObj.getEnginerId());
 			newProject.setProjectEstPrice(projObj.getProjectEstPrice());
 			newProject.setProjectStatus(projObj.getProjectStatus());
 			newProject = projectDao.save(projObj);
