@@ -19,7 +19,7 @@ public class ProjectAndPartsController {
     //----- Will register User to the DB With Encoded Password ----------
     @RequestMapping(value = "/createnewproject_01", method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> createNewProject(@RequestBody ProjectMaster projObj) throws projectExceptionMaster {
-        return ResponseEntity.ok(projPartsServObj.createNewProjectBasicDetail(projObj));
+        return ResponseEntity.ok(projPartsServObj.createNewProjectStep_01(projObj));
     }
 
 

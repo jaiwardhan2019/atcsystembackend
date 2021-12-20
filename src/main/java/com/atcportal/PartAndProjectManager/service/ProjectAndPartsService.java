@@ -9,7 +9,7 @@ public interface ProjectAndPartsService {
 
 
     //This will create new project and save data in table project_master.
-    public ProjectMaster createNewProjectBasicDetail(ProjectMaster proj) throws projectExceptionMaster;
+    public ProjectMaster createNewProjectStep_01(ProjectMaster proj) throws projectExceptionMaster;
 
 
     //This will retrive project basic detail and the parameter is project_master.projectid(int).

@@ -27,7 +27,7 @@ public class ProjectAndPartsServiceImp implements ProjectAndPartsService {
 
 
 	@Override
-	public ProjectMaster createNewProjectBasicDetail(ProjectMaster projObj) throws projectExceptionMaster {
+	public ProjectMaster createNewProjectStep_01(ProjectMaster projObj) throws projectExceptionMaster {
 
 		if (projObj.equals(null)) {throw new projectExceptionMaster("Project detail are Missing..!!:"+projObj);}
 
@@ -37,8 +37,9 @@ public class ProjectAndPartsServiceImp implements ProjectAndPartsService {
 			newProject.setQuoteNumber(projObj.getQuoteNumber());
 			newProject.setRevisionNo(projObj.getRevisionNo());
 			newProject.setSiteName(projObj.getSiteName());
-			newProject.setProjectEstPrice(projObj.getProjectEstPrice());
 			newProject.setEnginerName(projObj.getEnginerName());
+			newProject.setProjectEstPrice(projObj.getProjectEstPrice());
+			newProject.setProjectStatus(projObj.getProjectStatus());
 			newProject = projectDao.save(projObj);
 			logger.info("New Project # "+projObj.getProjectName()+" : Create By # "+ projObj.getEnginerName()+ " On # "+new Date());
 			return newProject;
