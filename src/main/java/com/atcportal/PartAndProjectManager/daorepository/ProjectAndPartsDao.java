@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ProjectAndPartsDao extends CrudRepository<ProjectMaster, Integer> {
-	
-	UserMaster findByProjectName(String projectName);
+
+    UserMaster findProjectByName(String projectName);
 
 }
