@@ -10,7 +10,7 @@ public class ProjectMaster {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "PROJECTID")
-	private long projectId;
+	private int projectId;
 
 
 	@Column(name = "NAME")
@@ -67,7 +67,13 @@ public class ProjectMaster {
 
 
 	//------ All Getter and Setter -----------
+	public int getProjectId() {
+		return projectId;
+	}
 
+	public void setProjectId(int projectId) {
+		this.projectId = projectId;
+	}
 	public String getProjectName() {
 		return projectName;
 	}
