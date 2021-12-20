@@ -1,5 +1,6 @@
 package com.atcportal.PartAndProjectManager.controller;
 
+import com.atcportal.PartAndProjectManager.customexception.projectExceptionMaster;
 import com.atcportal.PartAndProjectManager.models.ProjectMaster;
 import com.atcportal.PartAndProjectManager.service.ProjectAndPartsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,30 +17,22 @@ public class ProjectAndPartsController {
     ProjectAndPartsService  projPartsServObj;
 
     //----- Will register User to the DB With Encoded Password ----------
-    @RequestMapping(value = "/createnewproject", method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> createNewProject(@RequestBody ProjectMaster projObj) throws Exception {
-        System.out.println("Eng Name is :"+projObj.getEnginerName());
+    @RequestMapping(value = "/createnewproject_01", method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> createNewProject(@RequestBody ProjectMaster projObj) throws projectExceptionMaster {
         return ResponseEntity.ok(projPartsServObj.createNewProjectBasicDetail(projObj));
     }
 
 
 
-
-/*
-	//----- Will register User to the DB With Encoded Password ----------
-	@RequestMapping(value = "/listproject", method = RequestMethod.POST)
-	public ResponseEntity<?> projectList(@RequestBody UserMaster user) throws Exception {
-		return ResponseEntity.ok(userDetailsService.registerNewUser(user));
-	}
+    //----- Will register User to the DB With Encoded Password ----------
+    @RequestMapping(value = "/listallproject", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> listAllProject() throws projectExceptionMaster {
+        return ResponseEntity.ok(projPartsServObj.listAllProject());
+    }
 
 
-	//----- Will Update User to the DB With Encoded Password ----------
-	@RequestMapping(value = "/viewproject", method = RequestMethod.POST)
-	public ResponseEntity<?> updateUser(@RequestBody UserMaster user) throws Exception {
-		return ResponseEntity.ok(userDetailsService.updateYourDetail(user));
-	}
 
-*/
+
 
 
 }
