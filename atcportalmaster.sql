@@ -152,11 +152,12 @@ CREATE TABLE `user_master` (
   `GDPRCONSENT` varchar(1) DEFAULT 'Y',
   `GDPRCONSENT_DATE` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `ACTIVE` varchar(1) DEFAULT 'Y',
+  `USERLOGINCOUNT` int DEFAULT '0',
   PRIMARY KEY (`USER_ID`),
   UNIQUE KEY `USER_ID_UNIQUE` (`USER_ID`),
   UNIQUE KEY `USERNAME_UNIQUE` (`USERNAME`),
   UNIQUE KEY `EMAIL_UNIQUE` (`EMAIL`)
-) ENGINE=InnoDB AUTO_INCREMENT=102 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=115 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -165,7 +166,7 @@ CREATE TABLE `user_master` (
 
 LOCK TABLES `user_master` WRITE;
 /*!40000 ALTER TABLE `user_master` DISABLE KEYS */;
-INSERT INTO `user_master` VALUES (1,'Jai Wardhan ','test@test.com','898',NULL,'2021-12-02 17:22:15','test','$2a$10$cukp32yx2acQY4xLjIFns.LxWk.lANX9DHukQCFvoRYW8JxEqrXn.',NULL,'2021-12-02 17:22:15','Y'),(36,'Jai Wardhan','jai.wardhan2007@gmail.com','7423787234',NULL,'2021-12-02 16:50:30','jai','$2a$10$hNE2E14iM1FPGkUJv7PoveyoXP.9u98a/Ub1sT1CIj4nMqPJsaut.',NULL,'2021-12-02 16:50:30','Y'),(37,'Mohit Garg','mohit@mohit.com','321321321',NULL,'2021-12-02 16:51:28','mohit','$2a$10$UIcqH8706FKFK6OJAg8HHeyHgH.fUvhGZoAWIh9xH7k2fPIK1K.Fq',NULL,'2021-12-02 16:51:28','Y'),(38,'Dinesh G','dinesh@dinesh.com','321321321',NULL,'2021-12-02 16:51:48','dinesh','$2a$10$Wn3XqJA2pPuru13/GFy0kOSQrl6A7ybYDCCk6SaizkYc4EaajJQAm',NULL,'2021-12-02 16:51:48','Y'),(45,'Admin Admin','Admin@admin.com','086176059595',NULL,'2021-12-03 16:16:06','admin','$2a$10$ERuPXq9IV/JnNxK5Pi2RCuBYANrbEXWSTiq5L3nZe4Nnfl6nI3/F.',NULL,'2021-12-03 16:16:06','Y'),(76,'dsfdsfds','testfsdfs@sdf.com','47832798',NULL,'2021-12-08 16:08:40',NULL,'$2a$10$FQWEI2cZsaFGbZ9otuzWIunyacdk/1h8k/UGmXhiV.Z78rTpOtMgK','Y','2021-12-08 16:08:40','Y'),(78,'djsajkdsak','test@tes11t.com','787498729384',NULL,'2021-12-08 16:32:52',NULL,'$2a$10$p8DWJy87ifwIRX.3RO.Lb.JgVhR79/yjTjcP2abL91KcQiboPaoGS','Y','2021-12-08 16:32:52','Y'),(81,'test ','test@tesst.com','4837284',NULL,'2021-12-08 16:41:57','test1','$2a$10$BAYsiSyTHh6XrldsYWh0hentyBHpXFkm5vh8LRl4YjaoHW9WhGvku','Y','2021-12-08 16:41:57','Y'),(82,'Jai Wardhan','jai.wardhan@gmail.com','0861760595',NULL,'2021-12-08 16:58:41','jaiw','$2a$10$euJkRDCi09SScmtKAybAd.EQ3vvtg9UqHQkz2xqQ3yJP7HSs.zF4u','Y','2021-12-08 16:58:41','Y'),(85,'Jai Wardhan','jai.wardhan11@gmail.com','3423432432',NULL,'2021-12-08 17:00:18','jaiw1','$2a$10$O/gdSVohadpnFaGuGdicy.Z4DRhgzwgZPfUAS29.3MOp45Z9g6tGW','Y','2021-12-08 17:00:18','Y'),(86,'Rohit sharma','rohit@rohit.com','7482379832',NULL,'2021-12-08 17:16:25','rohit','$2a$10$FH2Lulaz6DvTs.pvTgXmCOxfkvO9GKf7ncBmYjawzRPtxXLTaOu4W','Y','2021-12-08 17:16:25','Y'),(87,'Wardhan','Warwwwdhan@awssardhan.com','432424234',NULL,'2021-12-08 18:17:05','test2ww2224s','$2a$10$e8BPdwqrw/3nD64eObRPGuAr3bdDfMXLLHrxtS6F.7.3TZvSA55GK','Y','2021-12-08 18:17:05','Y'),(93,'Wardhan','Warwwwdhan@asswssardhan.com','432424234',NULL,'2021-12-08 18:20:04','test2ww2s','$2a$10$mo02AzOshqX2Ffn2sLPO8ONs1b2XWXb0EpYCcyjYloRAHeSaM.m66','Y','2021-12-08 18:20:04','Y'),(101,'Wardhan','Warwwwdhan@asswssardwwhan.com','432424234',NULL,'2021-12-09 16:37:42','testp','$2a$10$11pTypNRRI5zpPHtxLoZLehrsTLrRCatwAq.u7fopmkVT9mFzGXi2','Y','2021-12-09 16:37:42','Y');
+INSERT INTO `user_master` VALUES (1,'Jai Wardhan','Admssin@admin.com','086176059595','6888  Pine View Rise  rise Aylesbury tallaght D35','2021-12-18 13:30:11','test','$2a$10$1/sLfRgs8BTqheCIaFAaouNGhO1K10jBSY2opauB3VWajTdp1ngka','Y','2021-12-02 17:22:15','Y',23),(36,'Jai Wardhan','jai.wardhan2007@gmail.com','7423787234',NULL,'2021-12-02 16:50:30','jai','$2a$10$hNE2E14iM1FPGkUJv7PoveyoXP.9u98a/Ub1sT1CIj4nMqPJsaut.',NULL,'2021-12-02 16:50:30','Y',0),(37,'Mohit Garg','mohit@mohit.com','321321321',NULL,'2021-12-16 16:41:04','mohit','$2a$10$UIcqH8706FKFK6OJAg8HHeyHgH.fUvhGZoAWIh9xH7k2fPIK1K.Fq',NULL,'2021-12-02 16:51:28','Y',2),(38,'Dinesh G','dinesh@dinesh.com','321321321',NULL,'2021-12-02 16:51:48','dinesh','$2a$10$Wn3XqJA2pPuru13/GFy0kOSQrl6A7ybYDCCk6SaizkYc4EaajJQAm',NULL,'2021-12-02 16:51:48','Y',0),(45,'Admin Admin','Admin@admin.com','086176059595',NULL,'2021-12-03 16:16:06','admin','$2a$10$ERuPXq9IV/JnNxK5Pi2RCuBYANrbEXWSTiq5L3nZe4Nnfl6nI3/F.',NULL,'2021-12-03 16:16:06','Y',0),(76,'dsfdsfds','testfsdfs@sdf.com','47832798',NULL,'2021-12-08 16:08:40',NULL,'$2a$10$FQWEI2cZsaFGbZ9otuzWIunyacdk/1h8k/UGmXhiV.Z78rTpOtMgK','Y','2021-12-08 16:08:40','Y',0),(78,'djsajkdsak','test@tes11t.com','787498729384',NULL,'2021-12-08 16:32:52',NULL,'$2a$10$p8DWJy87ifwIRX.3RO.Lb.JgVhR79/yjTjcP2abL91KcQiboPaoGS','Y','2021-12-08 16:32:52','Y',0),(81,'test ','test@tesst.com','4837284',NULL,'2021-12-08 16:41:57','test1','$2a$10$BAYsiSyTHh6XrldsYWh0hentyBHpXFkm5vh8LRl4YjaoHW9WhGvku','Y','2021-12-08 16:41:57','Y',0),(82,'Jai Wardhan','jai.wardhan@gmail.com','0861760595',NULL,'2021-12-08 16:58:41','jaiw','$2a$10$euJkRDCi09SScmtKAybAd.EQ3vvtg9UqHQkz2xqQ3yJP7HSs.zF4u','Y','2021-12-08 16:58:41','Y',0),(85,'Jai Wardhan','jai.wardhan11@gmail.com','3423432432',NULL,'2021-12-08 17:00:18','jaiw1','$2a$10$O/gdSVohadpnFaGuGdicy.Z4DRhgzwgZPfUAS29.3MOp45Z9g6tGW','Y','2021-12-08 17:00:18','Y',0),(86,'Rohit sharma','rohit@rohit.com','7482379832',NULL,'2021-12-08 17:16:25','rohit','$2a$10$FH2Lulaz6DvTs.pvTgXmCOxfkvO9GKf7ncBmYjawzRPtxXLTaOu4W','Y','2021-12-08 17:16:25','Y',0),(87,'Wardhan','Warwwwdhan@awssardhan.com','432424234',NULL,'2021-12-08 18:17:05','test2ww2224s','$2a$10$e8BPdwqrw/3nD64eObRPGuAr3bdDfMXLLHrxtS6F.7.3TZvSA55GK','Y','2021-12-08 18:17:05','Y',0),(93,'Wardhan','Warwwwdhan@asswssardhan.com','432424234',NULL,'2021-12-08 18:20:04','test2ww2s','$2a$10$mo02AzOshqX2Ffn2sLPO8ONs1b2XWXb0EpYCcyjYloRAHeSaM.m66','Y','2021-12-08 18:20:04','Y',0),(101,'Wardhan','Warwwwdhan@asswssardwwhan.com','432424234',NULL,'2021-12-09 16:37:42','testp','$2a$10$11pTypNRRI5zpPHtxLoZLehrsTLrRCatwAq.u7fopmkVT9mFzGXi2','Y','2021-12-09 16:37:42','Y',0),(109,'Ayush Wardhan','ayush@ayush.com','432424234',NULL,'2021-12-15 12:47:56','ayush1','$2a$10$PLghlqAsUaOTTEZbPHbt.uikcMzEOqYidgFuV3HW3Ib1GZoHORbAu','Y','2021-12-15 12:31:36','Y',0),(110,'Ayush Wardhan','ayus1h@ayush.com','432424234',NULL,'2021-12-16 13:31:02','dinesh1','$2a$10$LMazXabdk1Opo/xf9IMrFeGJVXNOnJY668HFPjT5pEgQpQ8X4fpQS','Y','2021-12-15 12:50:19','Y',0),(114,'Dinesh G','Dinesh@dinesh22.com','432424234',NULL,NULL,'dinesh2','$2a$10$TPIdXHp58CSzuk5rPX4axeO8XzIoVncjxN70OR5bA3q4dULCVmhmq','Y','2021-12-16 14:22:59','Y',0);
 /*!40000 ALTER TABLE `user_master` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -184,7 +185,7 @@ CREATE TABLE `user_profile` (
   `ADDED_BY_USER_NAME` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `ID_UNIQUE` (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -193,7 +194,7 @@ CREATE TABLE `user_profile` (
 
 LOCK TABLES `user_profile` WRITE;
 /*!40000 ALTER TABLE `user_profile` DISABLE KEYS */;
-INSERT INTO `user_profile` VALUES (2,1,1,'2021-11-27 12:10:24','0020'),(3,1,2,'2021-11-27 12:12:52',''),(4,1,3,'2021-11-27 12:12:52',''),(5,1,4,'2021-11-27 12:12:52',''),(6,1,5,'2021-11-27 12:13:01',''),(8,45,1,'2021-12-03 16:17:24',''),(9,45,2,'2021-12-03 16:17:24',''),(10,45,3,'2021-12-03 16:17:24',''),(12,37,1,'2021-12-03 16:42:04',''),(13,37,2,'2021-12-03 16:42:04',''),(14,37,3,'2021-12-03 16:42:04',''),(15,37,4,'2021-12-03 16:42:04',''),(16,37,5,'2021-12-03 16:42:04',''),(17,37,6,'2021-12-03 16:42:04','');
+INSERT INTO `user_profile` VALUES (2,1,1,'2021-11-27 12:10:24','0020'),(3,1,2,'2021-11-27 12:12:52',''),(4,1,3,'2021-11-27 12:12:52',''),(5,1,4,'2021-11-27 12:12:52',''),(6,1,5,'2021-11-27 12:13:01',''),(8,45,1,'2021-12-03 16:17:24',''),(9,45,2,'2021-12-03 16:17:24',''),(10,45,3,'2021-12-03 16:17:24',''),(12,37,1,'2021-12-03 16:42:04',''),(13,37,2,'2021-12-03 16:42:04',''),(14,37,3,'2021-12-03 16:42:04',''),(15,37,4,'2021-12-03 16:42:04',''),(16,37,5,'2021-12-03 16:42:04',''),(17,37,6,'2021-12-03 16:42:04',''),(24,1,6,'2021-12-14 19:03:29',NULL),(25,109,1,'2021-12-15 12:31:37',NULL),(26,109,2,'2021-12-15 12:31:37',NULL),(27,109,3,'2021-12-15 12:31:37',NULL),(28,109,4,'2021-12-15 12:31:37',NULL),(29,109,5,'2021-12-15 12:31:37',NULL),(30,109,6,'2021-12-15 12:31:37',NULL),(31,110,1,'2021-12-15 12:50:20',NULL),(32,110,2,'2021-12-15 12:50:20',NULL),(33,110,3,'2021-12-15 12:50:20',NULL),(34,110,4,'2021-12-15 12:50:20',NULL),(35,110,5,'2021-12-15 12:50:20',NULL),(36,110,6,'2021-12-15 12:50:20',NULL),(37,114,1,'2021-12-16 14:22:59',NULL),(38,114,2,'2021-12-16 14:22:59',NULL),(39,114,3,'2021-12-16 14:22:59',NULL),(40,114,4,'2021-12-16 14:22:59',NULL),(41,114,5,'2021-12-16 14:22:59',NULL),(42,114,6,'2021-12-16 14:22:59',NULL);
 /*!40000 ALTER TABLE `user_profile` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -206,4 +207,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-11 13:16:26
+-- Dump completed on 2021-12-20 10:13:00
