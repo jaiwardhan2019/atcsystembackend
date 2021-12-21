@@ -11,7 +11,7 @@ public interface ProjectAndPartsService {
 
 
     /**
-     * All Part related Service
+     * All Project related Services
      * Date : 18-Dec-2021
      */
 
@@ -24,8 +24,12 @@ public interface ProjectAndPartsService {
 
 
 
-    //This will retrive project basic detail and the parameter is project_master.projectid(int).
+    //This will Retrive project Full detail and the parameter is project_master.projectid(int).
     public ProjectMaster viewProjectBasicDetail(int projectId);
+
+
+
+
 
 
 
