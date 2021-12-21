@@ -34,6 +34,8 @@ public class ProjectMaster {
 	@Column(name = "POSTCODE")
 	private String postCode;
 
+	@Column(name = "CITYNAME")
+	private String cityName;
 
 	@Column(name = "ENGINERID")
 	private int enginerId;
@@ -126,6 +128,10 @@ public class ProjectMaster {
 	public void setPostCode(String postCode) {
 		this.postCode = postCode;
 	}
+
+	public String getCityName() { return cityName; 	}
+
+	public void setCityName(String cityName) { this.cityName = cityName; }
 
 	public String getEnginerName() {
 		return enginerName;

@@ -49,8 +49,6 @@ public class ProjectAndPartsServiceImp implements ProjectAndPartsService {
 			logger.info("New Project # "+projObj.getProjectName()+" : Create By # "+ projObj.getEnginerName()+ " On # "+new Date());
 			return newProject;
 		}
-
-
 		catch(Exception projEx){
 			String errorMessage=projEx.toString();
 			logger.error(errorMessage);
@@ -58,6 +56,9 @@ public class ProjectAndPartsServiceImp implements ProjectAndPartsService {
 		}
 
 	}
+
+
+
 
 	@Override
 	public List<ProjectMaster> listAllProject() {
