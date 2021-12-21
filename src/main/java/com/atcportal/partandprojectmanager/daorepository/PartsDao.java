@@ -1,6 +1,6 @@
-package com.atcportal.PartAndProjectManager.daorepository;
+package com.atcportal.partandprojectmanager.daorepository;
 
-import com.atcportal.PartAndProjectManager.models.PartsMaster;
+import com.atcportal.partandprojectmanager.models.PartsMaster;
 import org.springframework.data.repository.CrudRepository;
 
 

@@ -1,8 +1,6 @@
-package com.atcportal.main;
+package com.atcportal;
 
-import com.atcportal.PartAndProjectManager.customexception.projectExceptionMaster;
-import com.atcportal.PartAndProjectManager.models.ProjectMaster;
-import com.atcportal.PartAndProjectManager.service.ProjectAndPartsService;
+import com.atcportal.partandprojectmanager.service.ProjectAndPartsService;
 import com.atcportal.main.models.UserMaster;
 import com.atcportal.main.service.JwtUserDetailsService;
 import org.junit.Test;
