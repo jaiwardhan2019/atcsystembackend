@@ -1,4 +1,4 @@
-package com.atcportal.PartAndProjectManager.models;
+package com.atcportal.partandprojectmanager.models;
 
 import org.hibernate.annotations.UpdateTimestamp;
 
