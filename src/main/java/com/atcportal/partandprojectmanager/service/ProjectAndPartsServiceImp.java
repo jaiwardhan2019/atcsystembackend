@@ -39,7 +39,7 @@ public class ProjectAndPartsServiceImp implements ProjectAndPartsService {
 			ProjectMaster newProject = new ProjectMaster();
 
 			//-- Generate new Quote No for Project----
-			String newProjectQuoteno = populateRefNo(projObj.getEnginerName(),projectDao.getLatestProjectId());
+			String newProjectQuoteno = populateRefNo(projObj.getEnginerName(),projectDao.findNewProjectId());
 			newProject.setQuoteNumber(newProjectQuoteno);
 
 			newProject.setProjectName(projObj.getProjectName());
