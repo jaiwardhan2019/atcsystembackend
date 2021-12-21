@@ -1,8 +1,8 @@
-package com.atcportal.PartAndProjectManager.controller;
+package com.atcportal.partandprojectmanager.controller;
 
-import com.atcportal.PartAndProjectManager.customexception.projectExceptionMaster;
-import com.atcportal.PartAndProjectManager.models.ProjectMaster;
-import com.atcportal.PartAndProjectManager.service.ProjectAndPartsService;
+import com.atcportal.partandprojectmanager.customexception.projectExceptionMaster;
+import com.atcportal.partandprojectmanager.models.ProjectMaster;
+import com.atcportal.partandprojectmanager.service.ProjectAndPartsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

@@ -1,11 +1,11 @@
-package com.atcportal.PartAndProjectManager.service;
+package com.atcportal.partandprojectmanager.service;
 
-import com.atcportal.PartAndProjectManager.customexception.projectExceptionMaster;
+import com.atcportal.partandprojectmanager.customexception.projectExceptionMaster;
 
-import com.atcportal.PartAndProjectManager.daorepository.PartsDao;
-import com.atcportal.PartAndProjectManager.models.PartsMaster;
-import com.atcportal.PartAndProjectManager.models.ProjectMaster;
-import com.atcportal.PartAndProjectManager.daorepository.ProjectDao;
+import com.atcportal.partandprojectmanager.daorepository.PartsDao;
+import com.atcportal.partandprojectmanager.models.PartsMaster;
+import com.atcportal.partandprojectmanager.models.ProjectMaster;
+import com.atcportal.partandprojectmanager.daorepository.ProjectDao;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -62,6 +62,7 @@ public class ProjectAndPartsServiceImp implements ProjectAndPartsService {
 
 	@Override
 	public List<ProjectMaster> listAllProject() {
+
 		return (List<ProjectMaster>) projectDao.findAll();
 	}
 
@@ -70,7 +71,7 @@ public class ProjectAndPartsServiceImp implements ProjectAndPartsService {
 	@Override
 	public ProjectMaster viewProjectBasicDetail(int projectId) {
 
-		return null;
+		return projectDao.findOne(projectId);
 	}
 
 

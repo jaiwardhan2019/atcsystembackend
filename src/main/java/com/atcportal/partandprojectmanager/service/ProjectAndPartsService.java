@@ -1,8 +1,8 @@
-package com.atcportal.PartAndProjectManager.service;
+package com.atcportal.partandprojectmanager.service;
 
-import com.atcportal.PartAndProjectManager.customexception.projectExceptionMaster;
-import com.atcportal.PartAndProjectManager.models.PartsMaster;
-import com.atcportal.PartAndProjectManager.models.ProjectMaster;
+import com.atcportal.partandprojectmanager.customexception.projectExceptionMaster;
+import com.atcportal.partandprojectmanager.models.PartsMaster;
+import com.atcportal.partandprojectmanager.models.ProjectMaster;
 
 import java.util.List;
 

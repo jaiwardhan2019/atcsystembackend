@@ -1,4 +1,4 @@
-package com.atcportal.PartAndProjectManager.customexception;
+package com.atcportal.partandprojectmanager.customexception;
 
 public class projectExceptionMaster extends Exception {
 
