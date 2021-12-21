@@ -19,6 +19,10 @@ public interface ProjectAndPartsService {
     public ProjectMaster createNewProjectStep_01(ProjectMaster proj) throws projectExceptionMaster;
 
 
+    //This will Attach Component -  Parts Detail to the Newly Created Project.
+    public ProjectMaster createNewProjectStep_02(ProjectMaster proj) throws projectExceptionMaster;
+
+
     //This will retrive All Projects available in the table project_master.
     public List<ProjectMaster> listAllProject();
 

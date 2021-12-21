@@ -37,27 +37,35 @@ public class ProjectAndPartsServiceImp implements ProjectAndPartsService {
 
 		try {
 			ProjectMaster newProject = new ProjectMaster();
+
+			//-- Generate new Quote No for Project----
+			String newProjectQuoteno = populateRefNo(projObj.getEnginerName(),projectDao.getLatestProjectId());
+			newProject.setQuoteNumber(newProjectQuoteno);
+
 			newProject.setProjectName(projObj.getProjectName());
-			newProject.setQuoteNumber(projObj.getQuoteNumber());
 			newProject.setRevisionNo(projObj.getRevisionNo());
 			newProject.setSiteName(projObj.getSiteName());
 			newProject.setEnginerName(projObj.getEnginerName());
 			newProject.setEnginerId(projObj.getEnginerId());
 			newProject.setProjectEstPrice(projObj.getProjectEstPrice());
 			newProject.setProjectStatus(projObj.getProjectStatus());
-			newProject = projectDao.save(projObj);
+			newProject = projectDao.save(newProject);
 			logger.info("New Project # "+projObj.getProjectName()+" : Create By # "+ projObj.getEnginerName()+ " On # "+new Date());
 			return newProject;
 		}
 		catch(Exception projEx){
 			String errorMessage=projEx.toString();
 			logger.error(errorMessage);
+			System.out.println(projEx);
 			throw new projectExceptionMaster(errorMessage);
 		}
 
 	}
 
-
+	@Override
+	public ProjectMaster createNewProjectStep_02(ProjectMaster proj) throws projectExceptionMaster {
+		return null;
+	}
 
 
 	@Override
@@ -98,6 +106,64 @@ public class ProjectAndPartsServiceImp implements ProjectAndPartsService {
 	public List<PartsMaster> listAllParts() {
 		return (List<PartsMaster>) partsDao.findAll();
 	}
+
+
+
+
+
+
+
+
+
+
+	private String populateRefNo(String engineerName , int serialno){
+
+		String nameInitial[] = engineerName.split(" ");
+		String quoteNumber =null;
+		if(nameInitial.length > 1){
+			quoteNumber = Character.toString(nameInitial[0].charAt(0)) + Character.toString(nameInitial[1].charAt(0));
+		}
+		else{
+			quoteNumber = Character.toString(nameInitial[0].charAt(0)) + Character.toString(nameInitial[0].charAt(1))+
+					Character.toString(nameInitial[0].charAt(2));
+
+		}
+		quoteNumber=quoteNumber.toUpperCase();
+
+
+		Date d=new Date();
+		int year=d.getYear()+1900;
+		String currentYear = Integer.toString(year);
+
+		quoteNumber = quoteNumber + currentYear.substring(currentYear.length()-2);
+		quoteNumber = quoteNumber + padLeftZeros(Integer.toString(serialno),4);
+		return quoteNumber;
+	}
+
+
+
+
+	private String padLeftZeros(String inputString, int length) {
+		if (inputString.length() >= length) {
+			return inputString;
+		}
+		StringBuilder sb = new StringBuilder();
+		while (sb.length() < length - inputString.length()) {
+			sb.append('0');
+		}
+		sb.append(inputString);
+		return sb.toString();
+	}
+
+
+
+
+
+
+
+
+
+
 
 
 }

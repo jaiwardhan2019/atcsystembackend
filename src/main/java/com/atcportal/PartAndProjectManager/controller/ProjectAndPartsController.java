@@ -18,7 +18,7 @@ public class ProjectAndPartsController {
 
     //----- First Screen of Create Project   ----------
     @RequestMapping(value = "/createnewproject_01", method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> createNewProject(@RequestBody ProjectMaster projObj) throws projectExceptionMaster {
+    public ResponseEntity<?> createNewProjectStepOne(@RequestBody ProjectMaster projObj) throws projectExceptionMaster {
         return ResponseEntity.ok(projPartsServObj.createNewProjectStep_01(projObj));
     }
 
