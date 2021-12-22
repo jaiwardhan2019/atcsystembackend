@@ -43,6 +43,9 @@ public class UserMaster {
 	@Column(name = "GDPRCONSENT")
 	private String gdprConsent;
 
+	@Column(name = "GDPRCONSENT_DATE")
+	private Date gdprConsentDate;
+
 	@Column(name = "LASTLOGINDATE")
 	private Date lastLoginDate;
 
@@ -116,6 +119,13 @@ public class UserMaster {
 		this.gdprConsent = gdprConsent;
 	}
 
+	public Date getGdprConsentDate() {
+		return gdprConsentDate;
+	}
+
+	public void setGdprConsentDate(Date gdprConsentDate) {
+		this.gdprConsentDate = gdprConsentDate;
+	}
 
 	public String getUsername() {
 		return username;
