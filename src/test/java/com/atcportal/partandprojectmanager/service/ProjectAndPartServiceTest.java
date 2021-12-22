@@ -9,6 +9,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
@@ -16,7 +18,21 @@ import java.util.Date;
 @SpringBootTest
 public class ProjectAndPartServiceTest {
 
+
+
     @Test
+    public void convertDatetoString() throws ParseException {
+        String dateStr="2021-12-22 15:56:41.0";
+        Date dateData=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(dateStr);
+        System.out.println("Input Date :"+dateStr);
+        System.out.println("Output Date :"+new SimpleDateFormat("dd MMM yyyy HH:mm").format(dateData));
+
+    }
+
+
+
+
+        @Test
     public void populateRefNo(){
 
         String engineerName = "Jai Wardhan";

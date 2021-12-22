@@ -46,12 +46,17 @@ public class JwtAuthManageUserController {
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody UserMaster userdetail) throws Exception {
 
 		//--- This part of code will validate User / Password and create JWT Token
-		userDetailsService.authenticate(userdetail.getUsername(), userdetail.getPassword());
-		final UserDetails userDetails = userDetailsService.loadUserByUsername(userdetail.getUsername());
+		final UserDetails userDetails = userDetailsService.authenticate(userdetail.getUsername(), userdetail.getPassword());
+
+		//final UserDetails userDetails = userDetailsService.loadUserByUsername(userdetail.getUsername());
 		final String token = jwtTokenUtil.generateToken(userDetails);
+
 
         //--- This will load User Profile for the Portal to populate Menu Sub menu  -----
 		Map<String, String> userDetailAndProfile = userDetailsService.loadUserProfile(userdetail.getUsername());
+
+		//--- This will Update User Last Login Date Time and update Login Count by +1  -----
+		userDetailsService.updateUserLastLoginDateAdnLoginCount(userdetail.getUsername());
 
 		logger.info(userdetail.getUsername()+" : Logged in on # "+new Date());
 

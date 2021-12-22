@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -63,8 +64,9 @@ public class UserMaster {
 		this.userLoginCount = userLoginCount;
 	}
 
-	public Date getLastLoginDate() {
-		return lastLoginDate;
+	public String getLastLoginDate() {
+		return new SimpleDateFormat("dd MMM yyyy HH:mm").format(lastLoginDate);
+
 	}
 
 	public void setLastLoginDate(Date lastLoginDate) {

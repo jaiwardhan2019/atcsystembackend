@@ -3,6 +3,7 @@ package com.atcportal.partandprojectmanager.models;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -60,7 +61,9 @@ public class PartsMaster {
 
 	public void setPartPrice(Double partPrice) { this.partPrice = partPrice; }
 
-	public Date getAddedDate() { return addedDate; 	}
+	public String getAddedDate() {
+		return new SimpleDateFormat("dd MMM yyyy").format(addedDate);
+	}
 
 	public void setAddedDate(Date addedDate) { 	this.addedDate = addedDate; }
 

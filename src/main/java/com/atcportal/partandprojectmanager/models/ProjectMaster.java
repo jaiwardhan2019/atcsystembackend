@@ -3,8 +3,6 @@ package com.atcportal.partandprojectmanager.models;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -190,10 +188,7 @@ public class ProjectMaster {
 		this.cusgtomerType = cusgtomerType;
 	}
 
-	public String getOrderDate() {
-		SimpleDateFormat  dateFormat = new SimpleDateFormat("dd MMM yyyy");
-		return dateFormat.format(orderDate);
-	}
+	public String getOrderDate() {return new SimpleDateFormat("dd MMM yyyy").format(orderDate);}
 
 	public void setOrderDate(Date orderDate) {
 		this.orderDate = orderDate;

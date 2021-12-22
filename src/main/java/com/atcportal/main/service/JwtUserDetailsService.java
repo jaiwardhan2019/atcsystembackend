@@ -20,6 +20,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 
@@ -45,26 +47,15 @@ public class JwtUserDetailsService implements UserDetailsService {
 	private final Logger logger = Logger.getLogger(JwtAuthManageUserController.class);
 
 
-
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		UserMaster user = userDao.findByUsername(username);
 		if (user == null) {
 			throw new UsernameNotFoundException("User not found with username: " + username);
 		}
-		if(!isUpdatedLoginCount) {
-			user.setUserLoginCount(user.getUserLoginCount() + 1);
-			user.setLastLoginDate(new Date());
-			userDao.save(user);
-			isUpdatedLoginCount = true;
-		}else{
-			isUpdatedLoginCount = false;
-		}
 		return new org.springframework.security.core.
-				userdetails.User(user.getUsername(), user.getPassword(),new ArrayList<>());
+				userdetails.User(user.getUsername(), user.getPassword(), new ArrayList<>());
 	}
-
-
 
 
 	//---------- This will take user id(int) as parameter and display full detail -------
@@ -74,14 +65,12 @@ public class JwtUserDetailsService implements UserDetailsService {
 			throw new UsernameNotFoundException("User not found with user id: " + userId);
 		}
 		return new org.springframework.security.core.
-				userdetails.User(user.getUsername(), user.getPassword(),new ArrayList<>());
+				userdetails.User(user.getUsername(), user.getPassword(), new ArrayList<>());
 	}
 
 
-
-
 	//---------- This will take loginName  as parameter and display full detail Of User -------
-	public UserMaster showMyDetail(String  userLoginName) throws UsernameNotFoundException {
+	public UserMaster showMyDetail(String userLoginName) throws UsernameNotFoundException {
 		UserMaster userDetail = userDao.findByUsername(userLoginName);
 		if (userDetail == null) {
 			throw new UsernameNotFoundException("User not found with loginName : " + userDetail);
@@ -90,52 +79,45 @@ public class JwtUserDetailsService implements UserDetailsService {
 	}
 
 
+	public Map<String, String> loadUserProfile(String username) throws UsernameNotFoundException, ParseException {
 
-
-
-	public Map<String, String> loadUserProfile(String username) throws UsernameNotFoundException {
-
-		if (Strings.isNullOrEmpty(username)){
+		if (Strings.isNullOrEmpty(username)) {
 			throw new UsernameNotFoundException("User Name is missing ..!!");
 		}
 
 		List<Object[]> userProfileList = userProfileDao.getUserProfileList(username);
 
 		//---- Filter Object List and make------
-		String userid      = null;
-		String userName    = null;
-		String userEmail   = null;
+		String userid = null;
+		String userName = null;
+		String userEmail = null;
 		String lastLoginDate = null;
 		String userProfileMainMenu = null;
-		String userProfileAdmnSubMenu  = null;
+		String userProfileAdmnSubMenu = null;
 
-		for (int i=0; i<userProfileList.size(); i++){
+		for (int i = 0; i < userProfileList.size(); i++) {
 			Object[] row = (Object[]) userProfileList.get(i);
-			List<String> elephantList = Arrays.asList(Arrays.toString(row).substring( 1, Arrays.toString(row).length() - 1 ).split("\\s*,\\s*"));
-			userid= elephantList.get(0);
-			userName =elephantList.get(1);
-			userEmail=elephantList.get(2);
-			lastLoginDate = elephantList.get(3);
+			List<String> elephantList = Arrays.asList(Arrays.toString(row).substring(1, Arrays.toString(row).length() - 1).split("\\s*,\\s*"));
+			userid = elephantList.get(0);
+			userName = elephantList.get(1);
+			userEmail = elephantList.get(2);
+			lastLoginDate = forMattDatetoString(elephantList.get(3));
 
 			//--- Creating String for the main Menu..
-			if(userProfileMainMenu == null){
-				userProfileMainMenu=elephantList.get(4);
-			}
-			else
-				{
-					if(!userProfileMainMenu.contains(elephantList.get(4))) {
-						userProfileMainMenu = userProfileMainMenu + "," + elephantList.get(4);
-					}
+			if (userProfileMainMenu == null) {
+				userProfileMainMenu = elephantList.get(4);
+			} else {
+				if (!userProfileMainMenu.contains(elephantList.get(4))) {
+					userProfileMainMenu = userProfileMainMenu + "," + elephantList.get(4);
 				}
+			}
 
 
 			//--- Creating String for the Administration Sub Menu ..
-			if(elephantList.get(4).equals("ADMIN") && userProfileAdmnSubMenu == null){
-				userProfileAdmnSubMenu=elephantList.get(5);
-			}
-			else
-			{
-				if(elephantList.get(4).equals("ADMIN") && (!elephantList.get(4).equals("admin")) && (!userProfileAdmnSubMenu.contains(elephantList.get(5)))) {
+			if (elephantList.get(4).equals("ADMIN") && userProfileAdmnSubMenu == null) {
+				userProfileAdmnSubMenu = elephantList.get(5);
+			} else {
+				if (elephantList.get(4).equals("ADMIN") && (!elephantList.get(4).equals("admin")) && (!userProfileAdmnSubMenu.contains(elephantList.get(5)))) {
 					userProfileAdmnSubMenu = userProfileAdmnSubMenu + "," + elephantList.get(5);
 				}
 			}
@@ -160,14 +142,11 @@ public class JwtUserDetailsService implements UserDetailsService {
 	}
 
 
-
-
-
 	//------ Save User And Encoded Password to the DataBase
 	public UserMaster registerNewUser(UserMaster user) throws Exception {
 
 		if (user.equals(null)) {
-			throw new UsernameNotFoundException("User details are Missing..!!:"+user);
+			throw new UsernameNotFoundException("User details are Missing..!!:" + user);
 		}
 		try {
 			UserMaster newUser = new UserMaster();
@@ -179,30 +158,30 @@ public class JwtUserDetailsService implements UserDetailsService {
 			newUser.setGdprConsent(user.getGdprConsent());
 			newUser = userDao.save(newUser);
 			saveOrUpdateUserProfiles(newUser);
-			logger.info(user.getUserFullName()+" : Registered on # "+new Date());
+			logger.info(user.getUserFullName() + " : Registered on # " + new Date());
 			return newUser;
 
-		}
-		catch(Exception e)
-		{
-			String errorMessage=e.toString();
-			if(errorMessage.contains("USERNAME_UNIQUE")){errorMessage="Login Name :# "+ user.getUsername() + " is allready in use ...!!";}
-			if(errorMessage.contains("EMAIL_UNIQUE")){errorMessage="Email ID :# "+ user.getUserEmailID() + " is allready in use " +
-					" Please Correct your given Email ID or contact your Admin User to fix this issue...!!";}
+		} catch (Exception e) {
+			String errorMessage = e.toString();
+			if (errorMessage.contains("USERNAME_UNIQUE")) {
+				errorMessage = "Login Name :# " + user.getUsername() + " is allready in use ...!!";
+			}
+			if (errorMessage.contains("EMAIL_UNIQUE")) {
+				errorMessage = "Email ID :# " + user.getUserEmailID() + " is allready in use " +
+						" Please Correct your given Email ID or contact your Admin User to fix this issue...!!";
+			}
 			throw new Exception(errorMessage);
 		}
 	}
 
 
-
-
 	//--- This function is going to update table user_profile
 	private void saveOrUpdateUserProfiles(UserMaster userMaster) {
-		if(userMaster != null && userMaster.getUserId() != 0) {
+		if (userMaster != null && userMaster.getUserId() != 0) {
 			List<UserProfile> userProfiles = new ArrayList<>();
 			for (UserProfileIDs userProfileID : UserProfileIDs.values()) {
 				UserProfile userProfile = new UserProfile();
-				userProfile.setUserId(Integer.valueOf(userMaster.getUserId()+""));
+				userProfile.setUserId(Integer.valueOf(userMaster.getUserId() + ""));
 				userProfile.setAddedDate(new Date());
 				userProfile.setProfileId(userProfileID.getProfileId());
 				userProfiles.add(userProfile);
@@ -213,14 +192,11 @@ public class JwtUserDetailsService implements UserDetailsService {
 	}
 
 
-
-
-
 	//------ This will update User Deatil to the user_master Table
 	public UserMaster updateYourDetail(UserMaster user) throws Exception {
 
 		if (user.equals(null)) {
-			throw new UsernameNotFoundException("User details are Missing..!!:"+user);
+			throw new UsernameNotFoundException("User details are Missing..!!:" + user);
 		}
 		try {
 
@@ -232,89 +208,99 @@ public class JwtUserDetailsService implements UserDetailsService {
 			updateUser.setGdprConsent(user.getGdprConsent());
 			updateUser.setGdprConsentDate(new Date());
 			return userDao.save(updateUser);
+		} catch (Exception errorMessage) {
+			throw new Exception(errorMessage);
 		}
-
-		catch(Exception errorMessage){	throw new Exception(errorMessage);}
 	}
-
-
 
 
 	//------ This will update User Deatil to the user_master Table
 	public UserMaster updateYourPassword(UserMaster user) throws Exception {
 		if (user.equals(null)) {
-			throw new UsernameNotFoundException("User details are Missing..!!:"+user);
+			throw new UsernameNotFoundException("User details are Missing..!!:" + user);
 		}
-		try{
+		try {
 			UserMaster updateUser = userDao.findByUsername(user.getUsername());
 			updateUser.setPassword(bcryptEncoder.encode(user.getPassword()));
-			logger.info(user.getUserFullName()+" : Password is Changed # "+new Date());
+			logger.info(user.getUserFullName() + " : Password is Changed # " + new Date());
 			return userDao.save(updateUser);
+		} catch (Exception errorMessage) {
+			throw new Exception(errorMessage);
 		}
-		catch(Exception errorMessage){	throw new Exception(errorMessage);}
 	}
-
-
-
 
 
 	//------ This will update User Deatil to the user_master Table
 	public List<UserMaster> getallUserList() throws Exception {
-		try{
+		try {
 			List<UserMaster> listAllUser = (List<UserMaster>) userDao.findAll();
 			return listAllUser;
+		} catch (Exception errorMessage) {
+			throw new Exception(errorMessage);
 		}
-		catch(Exception errorMessage){	throw new Exception(errorMessage);}
 	}
-
-
-
-
 
 
 	//--- Will Validate User detail with DB.
-	public void authenticate(String username, String password) throws Exception {
+	public UserDetails authenticate(String username, String password) throws Exception {
 		try {
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
-		} catch (DisabledException e) { throw new Exception("USER_DISABLED", e); }
-		  catch (BadCredentialsException e) { throw new Exception("INVALID_CREDENTIALS", e);
+			return new org.springframework.security.core.userdetails.User(username, password, new ArrayList<>());
+
+		} catch (DisabledException e) {
+			throw new Exception("USER_DISABLED", e);
+		} catch (BadCredentialsException e) {
+			throw new Exception("INVALID_CREDENTIALS", e);
 		}
 	}
 
 
-
-
-
-	public String manageUserProfile(UserProfileDto userProfileDto){
+	public String manageUserProfile(UserProfileDto userProfileDto) {
 		if ("ADD".equalsIgnoreCase(userProfileDto.getAction())) {
 			UserProfile userProfile = new UserProfile();
-			userProfile.setProfileId(userProfileDto.getProfileId()+"");
+			userProfile.setProfileId(userProfileDto.getProfileId() + "");
 			userProfile.setUserId(userProfileDto.getUserId());
 			//userProfile.setAddedByUserName();
 			userProfile.setAddedDate(new Date());
 			userProfileDao.save(userProfile);
 			return "Profile Added to the User..";
-		}else if("DEL".equalsIgnoreCase(userProfileDto.getAction())) {
-			userProfileDao.deleteByUserIdAndProfileId(userProfileDto.getUserId(), userProfileDto.getProfileId()+"");
+		} else if ("DEL".equalsIgnoreCase(userProfileDto.getAction())) {
+			userProfileDao.deleteByUserIdAndProfileId(userProfileDto.getUserId(), userProfileDto.getProfileId() + "");
 			return "Profile Removed..";
 		}
 		return "FAILED..!!  Please try again..";
 	}
 
 
-
-
-
-	public void deleteUserByUserId(long userId){
+	public void deleteUserByUserId(long userId) {
 		userDao.delete(userId);
 		deleteUserProfilesByUserId(userId);
-		logger.info(userId +" : Removed on # "+new Date());
+		logger.info(userId + " : Removed on # " + new Date());
+	}
+
+
+	private void deleteUserProfilesByUserId(long userId) {
+		userProfileDao.delete(userProfileDao.findByUserId(Integer.valueOf(userId + "")));
+	}
+
+
+	/**
+	 * Input Parameter :2021-12-22 15:56:41.0
+	 * Return Date Str :22 Dec 2021 15:56
+	 */
+	private String forMattDatetoString(String inputDate) throws ParseException {
+		Date newDateFormatted = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(inputDate);
+		return new SimpleDateFormat("dd MMM yyyy HH:mm").format(newDateFormatted).toString();
 	}
 
 
 
-	private void deleteUserProfilesByUserId(long userId) {
-		userProfileDao.delete(userProfileDao.findByUserId(Integer.valueOf(userId+"")));
+	public void updateUserLastLoginDateAdnLoginCount(String username) {
+		UserMaster user = userDao.findByUsername(username);
+		user.setUserLoginCount(user.getUserLoginCount() + 1);
+		user.setLastLoginDate(new Date());
+		userDao.save(user);
+		isUpdatedLoginCount = true;
 	}
 
 }
