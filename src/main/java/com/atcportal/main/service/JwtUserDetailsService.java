@@ -66,7 +66,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 
 
 
-	//TODO  Here response type should be UserMaster along with the UserProfile
+
 	//---------- This will take user id(int) as parameter and display full detail -------
 	public UserDetails loadUserByUserId(long userId) throws UsernameNotFoundException {
 		UserMaster user = userDao.findOne(userId);
@@ -230,9 +230,10 @@ public class JwtUserDetailsService implements UserDetailsService {
 			updateUser.setUserPhoneNo(user.getUserPhoneNo());
 			updateUser.setUserFullAddress(user.getUserFullAddress());
 			updateUser.setGdprConsent(user.getGdprConsent());
+			updateUser.setGdprConsentDate(new Date());
 			return userDao.save(updateUser);
-
 		}
+
 		catch(Exception errorMessage){	throw new Exception(errorMessage);}
 	}
 

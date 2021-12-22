@@ -3,7 +3,12 @@ package com.atcportal.partandprojectmanager.models;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+
+// For Date formatting https://www.javatpoint.com/java-date-to-string
 
 @Entity
 @Table(name = "project_master",uniqueConstraints = { @UniqueConstraint(columnNames = "PROJECTID") })
@@ -185,8 +190,9 @@ public class ProjectMaster {
 		this.cusgtomerType = cusgtomerType;
 	}
 
-	public Date getOrderDate() {
-		return orderDate;
+	public String getOrderDate() {
+		SimpleDateFormat  dateFormat = new SimpleDateFormat("dd MMM yyyy");
+		return dateFormat.format(orderDate);
 	}
 
 	public void setOrderDate(Date orderDate) {
