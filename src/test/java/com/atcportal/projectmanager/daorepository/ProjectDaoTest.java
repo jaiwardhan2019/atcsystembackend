@@ -1,5 +1,6 @@
-package com.atcportal.partandprojectmanager.daorepository;
+package com.atcportal.projectmanager.daorepository;
 
+import com.atcportal.partandprojectmanager.daorepository.ProjectDao;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;

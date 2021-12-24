@@ -30,6 +30,19 @@ public class ProjectAndPartsServiceImp implements ProjectAndPartsService {
 	private final Logger logger = Logger.getLogger(ProjectAndPartsServiceImp.class);
 
 
+	@Override
+	public String createProjectQuoteNoForNewProjectStep_01(String engineerName) throws projectExceptionMaster {
+		//-- Generate new Quote No for Project----
+		String newProjectQuoteno = populateRefNo(engineerName,projectDao.findNewProjectId());
+		ProjectMaster newProject = new ProjectMaster();
+		newProject.setQuoteNumber(newProjectQuoteno);
+		newProject.setEnginerName(engineerName);
+		newProject = projectDao.save(newProject);
+		return newProjectQuoteno;
+	}
+
+
+
 
 	@Override
 	public ProjectMaster createNewProjectStep_01(ProjectMaster projObj) throws projectExceptionMaster {
@@ -39,10 +52,11 @@ public class ProjectAndPartsServiceImp implements ProjectAndPartsService {
 		try {
 			ProjectMaster newProject = new ProjectMaster();
 
-			//-- Generate new Quote No for Project----
+
+		    //-- Generate new Quote No for Project----
 			String newProjectQuoteno = populateRefNo(projObj.getEnginerName(),projectDao.findNewProjectId());
 			newProject.setQuoteNumber(newProjectQuoteno);
-
+		
 			newProject.setProjectName(projObj.getProjectName());
 			newProject.setSiteName(projObj.getSiteName());
 			newProject.setEnginerName(projObj.getEnginerName());

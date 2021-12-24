@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
-public class ProjectAndPartsController {
+public class ProjectController {
 
 
     @Autowired
@@ -29,16 +29,6 @@ public class ProjectAndPartsController {
     public ResponseEntity<?> listAllProject() throws projectExceptionMaster {
         return ResponseEntity.ok(projPartsServObj.listAllProject());
     }
-
-
-
-
-    //----- Get all Parts list from the table  parts_master----------
-    @RequestMapping(value = "/listallparts", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> listAllParts() throws projectExceptionMaster {
-        return ResponseEntity.ok(projPartsServObj.listAllParts());
-    }
-
 
 
 

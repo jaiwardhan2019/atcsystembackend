@@ -1,10 +1,14 @@
-package com.atcportal.partandprojectmanager.service;
+package com.atcportal.projectmanager.service;
 
 
+import com.atcportal.partandprojectmanager.customexception.projectExceptionMaster;
 import com.atcportal.partandprojectmanager.daorepository.ProjectDao;
+import com.atcportal.partandprojectmanager.models.ProjectMaster;
+import com.atcportal.partandprojectmanager.service.ProjectAndPartsService;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -16,7 +20,19 @@ import java.util.Date;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ProjectAndPartServiceTest {
+public class ProjectServiceTest {
+
+
+    @Autowired
+    ProjectAndPartsService projectService;
+
+    @Test
+    public void createProjectQuoteNoForNewProjectStep_01Test() throws projectExceptionMaster {
+
+        System.out.println("Quote No:"+projectService.createProjectQuoteNoForNewProjectStep_01("Jai Wardhan"));
+
+
+    }
 
 
 
@@ -32,7 +48,7 @@ public class ProjectAndPartServiceTest {
 
 
 
-        @Test
+    @Test
     public void populateRefNo(){
 
         String engineerName = "Jai Wardhan";

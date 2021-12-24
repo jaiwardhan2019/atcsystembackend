@@ -15,7 +15,12 @@ public interface ProjectAndPartsService {
      * Date : 18-Dec-2021
      */
 
-    //This will create new project and save data in table project_master.
+
+    //This will Update new project and save data in table project_master.
+    public String createProjectQuoteNoForNewProjectStep_01(String enginnerName) throws projectExceptionMaster;
+
+
+    //This will Update new project and save data in table project_master.
     public ProjectMaster createNewProjectStep_01(ProjectMaster proj) throws projectExceptionMaster;
 
 
