@@ -1,4 +1,4 @@
-package com.atcportal.projectmanager.service;
+package com.atcportal.partandprojectmanager.service;
 
 
 import com.atcportal.partandprojectmanager.customexception.projectExceptionMaster;
