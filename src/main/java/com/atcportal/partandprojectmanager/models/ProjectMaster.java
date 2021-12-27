@@ -57,7 +57,7 @@ public class ProjectMaster {
 
 
 	@Column(name = "COMPETITION")
-	private String competition;
+	private String competion;
 
 
 	@Column(name = "CONTRACTTYPE")
@@ -65,7 +65,7 @@ public class ProjectMaster {
 
 
 	@Column(name = "CUSTOMERTYPE")
-	private String cusgtomerType;
+	private String customerType;
 
 	@UpdateTimestamp
 	@Column(name = "ORDERDATE")
@@ -164,12 +164,12 @@ public class ProjectMaster {
 		this.maket = maket;
 	}
 
-	public String getCompetition() {
-		return competition;
+	public String getCompetion() {
+		return competion;
 	}
 
-	public void setCompetition(String competition) {
-		this.competition = competition;
+	public void setCompetion(String competition) {
+		this.competion = competion;
 	}
 
 	public String getContractType() {
@@ -180,15 +180,15 @@ public class ProjectMaster {
 		this.contractType = contractType;
 	}
 
-	public String getCusgtomerType() {
-		return cusgtomerType;
+	public String getCustomerType() {
+		return customerType;
 	}
 
-	public void setCusgtomerType(String cusgtomerType) {
-		this.cusgtomerType = cusgtomerType;
+	public void setCustomerType(String customerType) {
+		this.customerType = customerType;
 	}
 
-	public String getOrderDate() {return new SimpleDateFormat("dd MMM yyyy").format(orderDate);}
+	public Date getOrderDate() {return new Date(new SimpleDateFormat("dd MMM yyyy").format(orderDate));}
 
 	public void setOrderDate(Date orderDate) {
 		this.orderDate = orderDate;

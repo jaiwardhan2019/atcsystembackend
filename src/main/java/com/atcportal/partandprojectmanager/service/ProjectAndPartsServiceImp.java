@@ -67,10 +67,27 @@ public class ProjectAndPartsServiceImp implements ProjectAndPartsService {
 			//-- Generate new Quote No for Project----
 			newProject.setProjectName(projObj.getProjectName());
 			newProject.setSiteName(projObj.getSiteName());
+			newProject.setCityName(projObj.getCityName());
+			newProject.setPostCode(projObj.getPostCode());
 			newProject.setEnginerName(projObj.getEnginerName());
 			newProject.setEnginerId(projObj.getEnginerId());
-			newProject.setProjectEstPrice(projObj.getProjectEstPrice());
+			newProject.setQuoteType(projObj.getQuoteType());
+			newProject.setMaket(projObj.getMaket());
+			newProject.setCompetion(projObj.getCompetion());
+			newProject.setContractType(projObj.getContractType());
+			newProject.setCustomerType(projObj.getCustomerType());
+			newProject.setOrderDate(projObj.getOrderDate());
+			newProject.setPossiblityChance(projObj.getPossiblityChance());
+
+			System.out.println("Order Date:"+projObj.getOrderDate());
+
+
+
+			//newProject.setProjectEstPrice(projObj.getProjectEstPrice());
 			newProject.setProjectStatus(ProjectStatus.Inprocess.name());
+
+
+
 			newProject = projectDao.save(newProject);
 			logger.info("New Project # "+projObj.getProjectName()+" : Create By # "+ projObj.getEnginerName()+ " On # "+new Date());
 			return newProject;
