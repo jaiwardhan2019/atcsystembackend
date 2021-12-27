@@ -50,16 +50,16 @@ public class ProjectAndPartsServiceImp implements ProjectAndPartsService {
 		if (projObj.equals(null)) {throw new projectExceptionMaster("Project detail are Missing..!!:"+projObj);}
 
 		try {
+
 			ProjectMaster newProject = new ProjectMaster();
 
-
+			//----When Project Save button in clicked first Time-----
 			if(projObj.getProjectId() == 0){
 				String newProjectQuoteno = populateRefNo(projObj.getEnginerName(),projectDao.findNewProjectId());
 				newProject.setQuoteNumber(newProjectQuoteno);
 			}
 
 			if(projObj.getProjectId() != 0){
-				//newProject.setProjectId(projObj.getProjectId());
 				newProject = projectDao.findOne(projObj.getProjectId());
 			}
 
@@ -82,6 +82,8 @@ public class ProjectAndPartsServiceImp implements ProjectAndPartsService {
 		}
 
 	}
+
+
 
 	@Override
 	public ProjectMaster createNewProjectStep_02(ProjectMaster proj) throws projectExceptionMaster {
