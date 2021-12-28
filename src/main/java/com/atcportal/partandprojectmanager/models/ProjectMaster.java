@@ -60,6 +60,8 @@ public class ProjectMaster {
 	private String competion;
 
 
+
+
 	@Column(name = "CONTRACTTYPE")
 	private String contractType;
 
@@ -168,16 +170,8 @@ public class ProjectMaster {
 		return competion;
 	}
 
-	public void setCompetion(String competition) {
+	public void setCompetion(String competion) {
 		this.competion = competion;
-	}
-
-	public String getContractType() {
-		return contractType;
-	}
-
-	public void setContractType(String contractType) {
-		this.contractType = contractType;
 	}
 
 	public String getCustomerType() {
@@ -188,7 +182,15 @@ public class ProjectMaster {
 		this.customerType = customerType;
 	}
 
-	public Date getOrderDate() {return new Date(new SimpleDateFormat("dd MMM yyyy").format(orderDate));}
+	public String getContractType() {
+		return contractType;
+	}
+
+	public void setContractType(String contractType) {
+		this.contractType = contractType;
+	}
+
+	public String getOrderDate() {return new SimpleDateFormat("dd MMM yyyy").format(orderDate);}
 
 	public void setOrderDate(Date orderDate) {
 		this.orderDate = orderDate;

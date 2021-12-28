@@ -64,10 +64,7 @@ public class UserMaster {
 		this.userLoginCount = userLoginCount;
 	}
 
-	public String getLastLoginDate() {
-		return new SimpleDateFormat("dd MMM yyyy HH:mm").format(lastLoginDate);
-
-	}
+	public String getLastLoginDate() {return new SimpleDateFormat("dd MMM yyyy HH:mm").format(lastLoginDate);}
 
 	public void setLastLoginDate(Date lastLoginDate) {
 		this.lastLoginDate = lastLoginDate;

@@ -11,6 +11,8 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 
@@ -77,7 +79,7 @@ public class ProjectAndPartsServiceImp implements ProjectAndPartsService {
 			newProject.setCompetion(projObj.getCompetion());
 			newProject.setContractType(projObj.getContractType());
 			newProject.setCustomerType(projObj.getCustomerType());
-			newProject.setOrderDate(projObj.getOrderDate());
+			newProject.setOrderDate(new Date(projObj.getOrderDate()));
 			newProject.setPossiblityChance(projObj.getPossiblityChance());
 			//newProject.setProjectEstPrice(projObj.getProjectEstPrice());
 			newProject.setProjectStatus(ProjectStatus.Inprocess.name());
