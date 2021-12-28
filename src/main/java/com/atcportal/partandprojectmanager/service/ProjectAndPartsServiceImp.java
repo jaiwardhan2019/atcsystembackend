@@ -53,18 +53,19 @@ public class ProjectAndPartsServiceImp implements ProjectAndPartsService {
 
 			ProjectMaster newProject = new ProjectMaster();
 
-			//----When Project Save button in clicked first Time-----
+			// When Project Save button in clicked first Time Generate new Quote No for Project
 			if(projObj.getProjectId() == 0){
 				String newProjectQuoteno = populateRefNo(projObj.getEnginerName(),projectDao.findNewProjectId());
 				newProject.setQuoteNumber(newProjectQuoteno);
 			}
 
+			// When save button is clicked second time further on
 			if(projObj.getProjectId() != 0){
 				newProject = projectDao.findOne(projObj.getProjectId());
 			}
 
 
-			//-- Generate new Quote No for Project----
+			// ------ Collecting Date Form the Create new Form
 			newProject.setProjectName(projObj.getProjectName());
 			newProject.setSiteName(projObj.getSiteName());
 			newProject.setCityName(projObj.getCityName());
@@ -78,15 +79,8 @@ public class ProjectAndPartsServiceImp implements ProjectAndPartsService {
 			newProject.setCustomerType(projObj.getCustomerType());
 			newProject.setOrderDate(projObj.getOrderDate());
 			newProject.setPossiblityChance(projObj.getPossiblityChance());
-
-			System.out.println("Order Date:"+projObj.getOrderDate());
-
-
-
 			//newProject.setProjectEstPrice(projObj.getProjectEstPrice());
 			newProject.setProjectStatus(ProjectStatus.Inprocess.name());
-
-
 
 			newProject = projectDao.save(newProject);
 			logger.info("New Project # "+projObj.getProjectName()+" : Create By # "+ projObj.getEnginerName()+ " On # "+new Date());
@@ -156,7 +150,7 @@ public class ProjectAndPartsServiceImp implements ProjectAndPartsService {
 
 
 
-
+	// Take Engineer Name and project Serialno
 	private String populateRefNo(String engineerName , int serialno){
 
 		String nameInitial[] = engineerName.split(" ");
@@ -164,13 +158,12 @@ public class ProjectAndPartsServiceImp implements ProjectAndPartsService {
 		if(nameInitial.length > 1){
 			quoteNumber = Character.toString(nameInitial[0].charAt(0)) + Character.toString(nameInitial[1].charAt(0));
 		}
-		else{
+		else
+		{
 			quoteNumber = Character.toString(nameInitial[0].charAt(0)) + Character.toString(nameInitial[0].charAt(1))+
 					Character.toString(nameInitial[0].charAt(2));
-
 		}
 		quoteNumber=quoteNumber.toUpperCase();
-
 
 		Date d=new Date();
 		int year=d.getYear()+1900;
@@ -179,6 +172,7 @@ public class ProjectAndPartsServiceImp implements ProjectAndPartsService {
 		quoteNumber = quoteNumber + currentYear.substring(currentYear.length()-2);
 		quoteNumber = quoteNumber + padLeftZeros(Integer.toString(serialno),4);
 		return quoteNumber;
+
 	}
 
 

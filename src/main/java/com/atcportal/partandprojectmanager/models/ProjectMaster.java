@@ -67,7 +67,7 @@ public class ProjectMaster {
 	@Column(name = "CUSTOMERTYPE")
 	private String customerType;
 
-	@UpdateTimestamp
+	//@UpdateTimestamp
 	@Column(name = "ORDERDATE")
 	private Date orderDate;
 
