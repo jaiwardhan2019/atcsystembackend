@@ -24,6 +24,15 @@ public class ProjectController {
 
 
 
+    //----- Second Screen of Create Project Add Component  ----------
+    @RequestMapping(value = "/createnewproject_02", method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> createNewProjectStepTwo(@RequestBody ProjectMaster projObj) throws projectExceptionMaster {
+        return ResponseEntity.ok(projPartsServObj.createNewProjectStep_02(projObj));
+    }
+
+
+
+
     //----- Get all project from the table project_master  ----------
     @RequestMapping(value = "/listallproject", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> listAllProject() throws projectExceptionMaster {

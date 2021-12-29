@@ -82,7 +82,7 @@ public class ProjectAndPartsServiceImp implements ProjectAndPartsService {
 			newProject.setOrderDate(new Date(projObj.getOrderDate()));
 			newProject.setPossiblityChance(projObj.getPossiblityChance());
 			//newProject.setProjectEstPrice(projObj.getProjectEstPrice());
-			newProject.setProjectStatus(ProjectStatus.Inprocess.name());
+			newProject.setProjectStatus(ProjectStatus.InProcess.name());
 
 			newProject = projectDao.save(newProject);
 			logger.info("New Project # "+projObj.getProjectName()+" : Create By # "+ projObj.getEnginerName()+ " On # "+new Date());

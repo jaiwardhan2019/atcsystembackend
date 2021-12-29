@@ -1,7 +1,7 @@
 package com.atcportal.partandprojectmanager.models.enums;
 
 public enum ProjectStatus {
-    Inprocess,
+    InProcess,
     Ordered,
     Quoted,
     Cancelled

@@ -156,6 +156,8 @@ public class JwtUserDetailsService implements UserDetailsService {
 			newUser.setUsername(user.getUsername());
 			newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
 			newUser.setGdprConsent(user.getGdprConsent());
+			newUser.setGdprConsentDate(new Date());
+			newUser.setLastLoginDate(new Date());
 			newUser = userDao.save(newUser);
 			saveOrUpdateUserProfiles(newUser);
 			logger.info(user.getUserFullName() + " : Registered on # " + new Date());
