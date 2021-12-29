@@ -1,7 +1,9 @@
 package com.atcportal.partandprojectmanager.service;
 
-import com.atcportal.partandprojectmanager.customexception.projectExceptionMaster;
+import com.atcportal.partandprojectmanager.customexception.projectException;
+import com.atcportal.partandprojectmanager.customexception.projectMainComponentException;
 import com.atcportal.partandprojectmanager.models.PartsMaster;
+import com.atcportal.partandprojectmanager.models.ProjectMainComponent;
 import com.atcportal.partandprojectmanager.models.ProjectMaster;
 
 import java.util.List;
@@ -17,15 +19,15 @@ public interface ProjectAndPartsService {
 
 
     //Will Update new project and save data in table project_master.
-    public String createProjectQuoteNoForNewProjectStep_01(String enginnerName) throws projectExceptionMaster;
+    public String createProjectQuoteNoForNewProjectStep_01(String enginnerName) throws projectException;
 
 
     //Will Create new project and save data in table project_master.
-    public ProjectMaster createNewProjectStep_01(ProjectMaster proj) throws projectExceptionMaster;
+    public ProjectMaster createNewProjectStep_01(ProjectMaster proj) throws projectException;
 
 
     //Will Attach Component -  Parts Detail to the Newly Created Project.
-    public ProjectMaster createNewProjectStep_02(ProjectMaster proj) throws projectExceptionMaster;
+    public ProjectMainComponent createNewProjectStep_02(ProjectMainComponent pmcObj) throws projectMainComponentException;
 
 
     //Will retrive All Projects available in the table project_master.

@@ -21,10 +21,10 @@ public class UserProfile {
 	@Column(name="ID")
 	private int id;
 
-	@Column(name="USER_ID")
+	@Column(name="USERID")
 	private int  userId;
 
-	@Column(name="PROFILE_ID")
+	@Column(name="PROFILEID")
 	private String profileId;
 
 	public String getProfileId() {

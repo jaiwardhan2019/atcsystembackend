@@ -1,16 +1,11 @@
 package com.atcportal.partandprojectmanager.service;
 
 
-import com.atcportal.partandprojectmanager.customexception.projectExceptionMaster;
-import com.atcportal.partandprojectmanager.daorepository.ProjectDao;
-import com.atcportal.partandprojectmanager.models.ProjectMaster;
-import com.atcportal.partandprojectmanager.service.ProjectAndPartsService;
-import org.assertj.core.api.Assertions;
+import com.atcportal.partandprojectmanager.customexception.projectException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.text.ParseException;
@@ -27,7 +22,7 @@ public class ProjectServiceTest {
     ProjectAndPartsService projectService;
 
     @Test
-    public void createProjectQuoteNoForNewProjectStep_01Test() throws projectExceptionMaster {
+    public void createProjectQuoteNoForNewProjectStep_01Test() throws projectException {
 
         System.out.println("Quote No:"+projectService.createProjectQuoteNoForNewProjectStep_01("Jai Wardhan"));
 

@@ -1,9 +1,12 @@
 package com.atcportal.partandprojectmanager.service;
 
-import com.atcportal.partandprojectmanager.customexception.projectExceptionMaster;
+import com.atcportal.partandprojectmanager.customexception.projectException;
 
+import com.atcportal.partandprojectmanager.customexception.projectMainComponentException;
 import com.atcportal.partandprojectmanager.daorepository.PartsDao;
+import com.atcportal.partandprojectmanager.daorepository.ProjectMainComponentDao;
 import com.atcportal.partandprojectmanager.models.PartsMaster;
+import com.atcportal.partandprojectmanager.models.ProjectMainComponent;
 import com.atcportal.partandprojectmanager.models.ProjectMaster;
 import com.atcportal.partandprojectmanager.daorepository.ProjectDao;
 import com.atcportal.partandprojectmanager.models.enums.ProjectStatus;
@@ -11,8 +14,6 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 
@@ -25,6 +26,12 @@ public class ProjectAndPartsServiceImp implements ProjectAndPartsService {
 
 
 	@Autowired
+	private ProjectMainComponentDao pmcDao;
+
+
+
+
+	@Autowired
 	private PartsDao partsDao;
 
 
@@ -33,7 +40,7 @@ public class ProjectAndPartsServiceImp implements ProjectAndPartsService {
 
 
 	@Override
-	public String createProjectQuoteNoForNewProjectStep_01(String engineerName) throws projectExceptionMaster {
+	public String createProjectQuoteNoForNewProjectStep_01(String engineerName) throws projectException {
 		//-- Generate new Quote No for Project----
 		String newProjectQuoteno = populateRefNo(engineerName,projectDao.findNewProjectId());
 		ProjectMaster newProject = new ProjectMaster();
@@ -47,9 +54,9 @@ public class ProjectAndPartsServiceImp implements ProjectAndPartsService {
 
 
 	@Override
-	public ProjectMaster createNewProjectStep_01(ProjectMaster projObj) throws projectExceptionMaster {
+	public ProjectMaster createNewProjectStep_01(ProjectMaster projObj) throws projectException {
 
-		if (projObj.equals(null)) {throw new projectExceptionMaster("Project detail are Missing..!!:"+projObj);}
+		if (projObj.equals(null)) {throw new projectException("Project detail are Missing..!!:"+projObj);}
 
 		try {
 
@@ -91,7 +98,7 @@ public class ProjectAndPartsServiceImp implements ProjectAndPartsService {
 		catch(Exception projEx){
 			String errorMessage=projEx.toString();
 			logger.error(errorMessage);
-			throw new projectExceptionMaster(errorMessage);
+			throw new projectException(errorMessage);
 		}
 
 	}
@@ -99,9 +106,10 @@ public class ProjectAndPartsServiceImp implements ProjectAndPartsService {
 
 
 	@Override
-	public ProjectMaster createNewProjectStep_02(ProjectMaster proj) throws projectExceptionMaster {
-		return null;
+	public ProjectMainComponent createNewProjectStep_02(ProjectMainComponent pmcObj) throws projectMainComponentException {
+		return pmcDao.save(pmcObj);
 	}
+
 
 
 	@Override

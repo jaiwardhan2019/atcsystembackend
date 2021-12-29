@@ -16,7 +16,7 @@ public class UserMaster {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "USER_ID")
+	@Column(name = "USERID")
 	private long userId;
 
 	@Column(name = "NAME")

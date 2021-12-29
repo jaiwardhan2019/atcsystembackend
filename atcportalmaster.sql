@@ -50,7 +50,7 @@ DROP TABLE IF EXISTS `document_master`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `document_master` (
   `DOCID` int NOT NULL AUTO_INCREMENT,
-  `USER_ID` int DEFAULT '0',
+  `USERID` int DEFAULT '0',
   `PROJECT_ID` int DEFAULT '0',
   `FOLDERNAME` varchar(150) COLLATE utf8_bin DEFAULT NULL,
   `FILENAME` varchar(350) COLLATE utf8_bin DEFAULT NULL,
@@ -106,11 +106,11 @@ DROP TABLE IF EXISTS `profile_master`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `profile_master` (
-  `PROFILE_ID` int NOT NULL AUTO_INCREMENT,
+  `PROFILEID` int NOT NULL AUTO_INCREMENT,
   `MAIN_MENU` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `SUB_MENU` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `ADDED_DATE` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`PROFILE_ID`)
+  PRIMARY KEY (`PROFILEID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -174,7 +174,7 @@ DROP TABLE IF EXISTS `user_master`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user_master` (
-  `USER_ID` int NOT NULL AUTO_INCREMENT,
+  `USERID` int NOT NULL AUTO_INCREMENT,
   `NAME` varchar(100) DEFAULT NULL,
   `EMAIL` varchar(100) DEFAULT NULL,
   `PHONENO` varchar(45) DEFAULT NULL,
@@ -186,8 +186,8 @@ CREATE TABLE `user_master` (
   `GDPRCONSENT_DATE` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `ACTIVE` varchar(1) DEFAULT 'Y',
   `USERLOGINCOUNT` int DEFAULT '0',
-  PRIMARY KEY (`USER_ID`),
-  UNIQUE KEY `USER_ID_UNIQUE` (`USER_ID`),
+  PRIMARY KEY (`USERID`),
+  UNIQUE KEY `USERID_UNIQUE` (`USERID`),
   UNIQUE KEY `USERNAME_UNIQUE` (`USERNAME`),
   UNIQUE KEY `EMAIL_UNIQUE` (`EMAIL`)
 ) ENGINE=InnoDB AUTO_INCREMENT=115 DEFAULT CHARSET=utf8;
@@ -212,8 +212,8 @@ DROP TABLE IF EXISTS `user_profile`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user_profile` (
   `ID` int NOT NULL AUTO_INCREMENT,
-  `USER_ID` int DEFAULT NULL,
-  `PROFILE_ID` int NOT NULL,
+  `USERID` int DEFAULT NULL,
+  `PROFILEID` int NOT NULL,
   `ADDED_DATE` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `ADDED_BY_USER_NAME` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`ID`),
