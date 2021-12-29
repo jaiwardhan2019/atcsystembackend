@@ -97,7 +97,7 @@ public class ProjectAndPartsServiceImp implements ProjectAndPartsService {
 		}
 		catch(Exception projEx){
 			String errorMessage=projEx.toString();
-			logger.error(errorMessage);
+			logger.error(new projectException("Error While Creating New Project on Screen One:"+errorMessage));
 			throw new projectException(errorMessage);
 		}
 
@@ -107,7 +107,17 @@ public class ProjectAndPartsServiceImp implements ProjectAndPartsService {
 
 	@Override
 	public ProjectMainComponent createNewProjectStep_02(ProjectMainComponent pmcObj) throws projectMainComponentException {
-		return pmcDao.save(pmcObj);
+		try {
+			ProjectMainComponent newObjPmC = new ProjectMainComponent();
+			newObjPmC.setProjectId(pmcObj.getProjectId());
+			newObjPmC.setComponentName(pmcObj.getComponentName());
+			newObjPmC.setSubComponentName(pmcObj.getSubComponentName());
+			newObjPmC.setAddedDate(new Date());
+			return pmcDao.save(newObjPmC);
+		} catch (Exception e) {
+			logger.error(new projectMainComponentException("Error While Adding Component to Project # "+e.toString()));
+			throw new projectMainComponentException("Error While Adding Component to Project # "+e.toString());
+		}
 	}
 
 
