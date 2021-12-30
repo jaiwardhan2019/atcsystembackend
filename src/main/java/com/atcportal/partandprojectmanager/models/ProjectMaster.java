@@ -3,7 +3,10 @@ package com.atcportal.partandprojectmanager.models;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+
+// For Date formatting https://www.javatpoint.com/java-date-to-string
 
 @Entity
 @Table(name = "project_master",uniqueConstraints = { @UniqueConstraint(columnNames = "PROJECTID") })
@@ -54,7 +57,9 @@ public class ProjectMaster {
 
 
 	@Column(name = "COMPETITION")
-	private String competition;
+	private String competion;
+
+
 
 
 	@Column(name = "CONTRACTTYPE")
@@ -62,9 +67,9 @@ public class ProjectMaster {
 
 
 	@Column(name = "CUSTOMERTYPE")
-	private String cusgtomerType;
+	private String customerType;
 
-	@UpdateTimestamp
+	//@UpdateTimestamp
 	@Column(name = "ORDERDATE")
 	private Date orderDate;
 
@@ -161,12 +166,20 @@ public class ProjectMaster {
 		this.maket = maket;
 	}
 
-	public String getCompetition() {
-		return competition;
+	public String getCompetion() {
+		return competion;
 	}
 
-	public void setCompetition(String competition) {
-		this.competition = competition;
+	public void setCompetion(String competion) {
+		this.competion = competion;
+	}
+
+	public String getCustomerType() {
+		return customerType;
+	}
+
+	public void setCustomerType(String customerType) {
+		this.customerType = customerType;
 	}
 
 	public String getContractType() {
@@ -177,17 +190,7 @@ public class ProjectMaster {
 		this.contractType = contractType;
 	}
 
-	public String getCusgtomerType() {
-		return cusgtomerType;
-	}
-
-	public void setCusgtomerType(String cusgtomerType) {
-		this.cusgtomerType = cusgtomerType;
-	}
-
-	public Date getOrderDate() {
-		return orderDate;
-	}
+	public String getOrderDate() {return new SimpleDateFormat("dd MMM yyyy").format(orderDate);}
 
 	public void setOrderDate(Date orderDate) {
 		this.orderDate = orderDate;

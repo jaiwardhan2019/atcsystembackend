@@ -1,20 +1,47 @@
 package com.atcportal.partandprojectmanager.service;
 
 
-import com.atcportal.partandprojectmanager.daorepository.ProjectDao;
-import org.assertj.core.api.Assertions;
+import com.atcportal.partandprojectmanager.customexception.projectException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ProjectAndPartServiceTest {
+public class ProjectServiceTest {
+
+
+    @Autowired
+    ProjectAndPartsService projectService;
+
+    @Test
+    public void createProjectQuoteNoForNewProjectStep_01Test() throws projectException {
+
+        System.out.println("Quote No:"+projectService.createProjectQuoteNoForNewProjectStep_01("Jai Wardhan"));
+
+
+    }
+
+
+
+    @Test
+    public void convertDatetoString() throws ParseException {
+        String dateStr="2021-12-22 15:56:41.0";
+        Date dateData=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(dateStr);
+        System.out.println("Input Date :"+dateStr);
+        System.out.println("Output Date :"+new SimpleDateFormat("dd MMM yyyy HH:mm").format(dateData));
+
+    }
+
+
+
 
     @Test
     public void populateRefNo(){

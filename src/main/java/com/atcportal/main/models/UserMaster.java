@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -15,7 +16,7 @@ public class UserMaster {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "USER_ID")
+	@Column(name = "USERID")
 	private long userId;
 
 	@Column(name = "NAME")
@@ -43,6 +44,9 @@ public class UserMaster {
 	@Column(name = "GDPRCONSENT")
 	private String gdprConsent;
 
+	@Column(name = "GDPRCONSENT_DATE")
+	private Date gdprConsentDate;
+
 	@Column(name = "LASTLOGINDATE")
 	private Date lastLoginDate;
 
@@ -60,9 +64,7 @@ public class UserMaster {
 		this.userLoginCount = userLoginCount;
 	}
 
-	public Date getLastLoginDate() {
-		return lastLoginDate;
-	}
+	public String getLastLoginDate() {return new SimpleDateFormat("dd MMM yyyy HH:mm").format(lastLoginDate);}
 
 	public void setLastLoginDate(Date lastLoginDate) {
 		this.lastLoginDate = lastLoginDate;
@@ -116,6 +118,13 @@ public class UserMaster {
 		this.gdprConsent = gdprConsent;
 	}
 
+	public Date getGdprConsentDate() {
+		return gdprConsentDate;
+	}
+
+	public void setGdprConsentDate(Date gdprConsentDate) {
+		this.gdprConsentDate = gdprConsentDate;
+	}
 
 	public String getUsername() {
 		return username;
