@@ -73,6 +73,7 @@ public class ProjectAndPartsServiceImp implements ProjectAndPartsService {
 				newProject = projectDao.findOne(projObj.getProjectId());
 			}
 
+			System.out.println("Project ID :"+newProject.getProjectId());
 
 			// ------ Collecting Date Form the Create new Form
 			newProject.setProjectName(projObj.getProjectName());
@@ -124,8 +125,8 @@ public class ProjectAndPartsServiceImp implements ProjectAndPartsService {
 
 	@Override
 	public List<ProjectMaster> listAllProject() {
-
 		return (List<ProjectMaster>) projectDao.findAll();
+		//return projectDao.findByEnginerIdOrderByProjectIdDesc(1);
 	}
 
 

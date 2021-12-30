@@ -15,7 +15,7 @@ public interface ProjectDao extends CrudRepository<ProjectMaster, Integer> {
     @Query("SELECT max(PROJECTID)+1 FROM ProjectMaster")
     int findNewProjectId();
 
-    List<ProjectMaster> findByEnginerIdOrderByOrderDateDesc(int enginerId);
+    List<ProjectMaster> findByEnginerIdOrderByProjectIdDesc(int enginerId);
 
     @Query("SELECT distinct(YEAR(ORDERDATE)) FROM ProjectMaster")
     List<String> findProjectYears();

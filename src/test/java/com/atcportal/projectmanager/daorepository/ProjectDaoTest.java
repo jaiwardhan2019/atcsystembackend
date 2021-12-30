@@ -27,6 +27,7 @@ public class ProjectDaoTest {
 
     @Test
     public void testFindByEnginerIdOrderByOrderDateDesc(){
-        Assertions.assertThat(projectDao.findByEnginerIdOrderByOrderDateDesc(1).size() == 21);
+        Assertions.assertThat(projectDao.findByEnginerIdOrderByProjectIdDesc(1).size() == 21);
+       // Assertions.assertThat(projectDao.findByEnginerIdOrderByProjectIdDesc().size() == 21);
     }
 }

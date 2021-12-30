@@ -4,6 +4,7 @@ package com.atcportal.partandprojectmanager.models;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "project_main_component",uniqueConstraints = { @UniqueConstraint(columnNames = "PROJCOMPONENTID") })
